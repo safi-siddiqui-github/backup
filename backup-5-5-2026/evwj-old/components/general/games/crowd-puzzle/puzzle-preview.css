@@ -1,0 +1,43 @@
+/* Custom styles for puzzle preview - Disabled magnetic/snapping effects */
+.jigsaw-puzzle {
+	width: 100% !important;
+	height: 100% !important;
+	position: relative !important;
+}
+
+.jigsaw-puzzle__piece {
+	border: 2px solid purple !important;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15) !important;
+	/* Completely disable all transitions and animations to prevent glitching */
+	transition: none !important;
+	animation: none !important;
+	transform: none !important;
+	will-change: auto !important;
+}
+
+.jigsaw-puzzle__piece:hover {
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+	/* No transition on hover to prevent glitching */
+	transition: box-shadow 0.15s ease !important;
+}
+
+.jigsaw-puzzle__piece--solved {
+	border-color: #10b981 !important;
+	box-shadow: 0 4px 8px rgba(16, 185, 129, 0.4) !important;
+	/* Only allow very subtle transition on solved state */
+	transition:
+		box-shadow 0.2s ease,
+		border-color 0.2s ease !important;
+	animation: none !important;
+	transform: none !important;
+}
+
+.jigsaw-puzzle__piece--dragging {
+	z-index: 10 !important;
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4) !important;
+	/* Remove transform scaling during drag to prevent glitching */
+	transform: none !important;
+	transition: box-shadow 0.1s ease !important;
+	/* Only allow shadow transition, no position transitions */
+	will-change: transform, left, top !important;
+}

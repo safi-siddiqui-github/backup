@@ -1,0 +1,75 @@
+   ▲ Next.js 16.0.7 (Turbopack)
+   - Environments: .env
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 30.1s
+   Running TypeScript ...
+   Collecting page data using 11 workers ...
+   Generating static pages using 11 workers (0/31) ...
+   Generating static pages using 11 workers (7/31) 
+   Generating static pages using 11 workers (15/31) 
+   Generating static pages using 11 workers (23/31) 
+ ✓ Generating static pages using 11 workers (31/31) in 2.8s
+   Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /about
+├ ƒ /api/amplify/auth/[slug]
+├ ƒ /api/auth/signup
+├ ƒ /api/auth/signup-email-verification
+├ ƒ /api/auth/signup-email-verification-resend
+├ ƒ /api/oauth
+├ ƒ /api/user/fetch-user-attributes
+├ ○ /contact
+├ ○ /dashboard
+├ ○ /dashboard/attending
+├ ○ /dashboard/event/create
+├ ƒ /dashboard/event/detail/[slug]
+├ ƒ /dashboard/event/detail/[slug]/games/[gameSlug]
+├ ƒ /dashboard/event/detail/[slug]/games/[gameSlug]/discover-games
+├ ƒ /dashboard/event/detail/[slug]/games/[gameSlug]/discover-games/battle-of-opinions
+├ ƒ /dashboard/event/detail/[slug]/games/[gameSlug]/discover-games/battle-of-opinions/battle-of-opinions-custom
+├ ƒ /dashboard/event/detail/[slug]/games/[gameSlug]/discover-games/crowd-puzzle
+├ ƒ /dashboard/event/detail/[slug]/games/[gameSlug]/discover-games/crowd-puzzle/crowd-puzzle-custom
+├ ƒ /dashboard/event/detail/[slug]/games/[gameSlug]/discover-games/digital-bingo
+├ ƒ /dashboard/event/detail/[slug]/games/[gameSlug]/discover-games/digital-bingo/digital-bingo-custom
+├ ƒ /dashboard/event/detail/[slug]/games/[gameSlug]/discover-games/prediction-master
+├ ƒ /dashboard/event/detail/[slug]/games/[gameSlug]/discover-games/prediction-master/prediction-master-custom
+├ ƒ /dashboard/event/detail/[slug]/games/[gameSlug]/discover-games/puzzle-rush
+├ ƒ /dashboard/event/detail/[slug]/games/[gameSlug]/discover-games/puzzle-rush/puzzle-rush-custom
+├ ƒ /dashboard/event/detail/[slug]/games/[gameSlug]/discover-games/scavenger-hunt
+├ ƒ /dashboard/event/detail/[slug]/games/[gameSlug]/discover-games/scavenger-hunt/scavenger-hunt-custom
+├ ƒ /dashboard/event/detail/[slug]/games/[gameSlug]/discover-games/tap-race
+├ ƒ /dashboard/event/detail/[slug]/games/[gameSlug]/discover-games/tap-race/tap-race-custom
+├ ƒ /dashboard/event/detail/[slug]/games/[gameSlug]/discover-games/trivia
+├ ƒ /dashboard/event/detail/[slug]/games/[gameSlug]/discover-games/trivia/trivia-custom
+├ ƒ /dashboard/event/detail/[slug]/games/[gameSlug]/my-games
+├ ƒ /dashboard/organization/verify/[token]
+├ ○ /dashboard/settings
+├ ○ /events
+├ ƒ /events/[slug]
+├ ○ /features
+├ ○ /forgot-password/check-email
+├ ○ /forgot-password/update-password
+├ ○ /help
+├ ○ /how-it-works
+├ ○ /organizers
+├ ƒ /organizers/[organizerId]
+├ ○ /signin
+├ ○ /signup
+├ ○ /signup-email-verification
+├ ○ /social-login
+├ ○ /test-AWS
+├ ○ /test/deleteUser
+├ ○ /test/logout
+├ ○ /vendor
+└ ○ /vendor/profile
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

@@ -1,0 +1,277 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "./generated"
+}
+
+datasource db {
+  provider = "postgresql"
+  // url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int          @id @default(autoincrement())
+  email         String?      @unique
+  username      String?      @unique
+  firstname     String?
+  lastname      String?
+  password      String?
+  countryCode   String?
+  phone         String?
+  agreedTerms   Boolean?
+  avatar        String?
+  googleId      String?
+  microsoftId   String?
+  facebookId    String?
+  linkedinId    String?
+  appleId       String?
+  emailVerified Boolean?
+  phoneVerified Boolean?
+  createdAt     DateTime?    @default(now())
+  updatedAt     DateTime?    @updatedAt
+  otps          OTP[]
+  tokens        Token[]
+  eventModels   EventModel[]
+  // clerkId              String                   @unique
+  // sessions             Session[]
+  // eventModels          EventModel[]
+  // organizationMembers  OrganizationMember[]
+  // notifications        Notification[]
+  // createdOrganizations Organization[]           @relation("OrganizationCreator")
+  // sentInvitations      OrganizationInvitation[] @relation("Inviter")
+  // receivedInvitations  OrganizationInvitation[] @relation("InvitedUser")
+  // formFieldTypes       FormFieldType[]
+}
+
+model OTP {
+  id        Int       @id @default(autoincrement())
+  code      Int?
+  expiresAt DateTime?
+  userId    Int?      @unique
+  user      User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
+}
+
+model Token {
+  id            Int       @id @default(autoincrement())
+  encrypted     String?
+  expiresAt     DateTime?
+  isAdmin       Boolean?
+  emailVerified Boolean?
+  phoneVerified Boolean?
+  userId        Int?
+  user          User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt     DateTime? @default(now())
+  updatedAt     DateTime? @updatedAt
+}
+
+enum EventVisibility {
+  PUBLIC
+  PRIVATE
+  ORGANIZATION
+}
+
+enum EventDateType {
+  SINGLE
+  RECURRING
+}
+
+enum EventRecurringPattern {
+  DAILY
+  WEEKLY
+  MONTHLY
+  YEARLY
+}
+
+enum EventRecurringEnd {
+  NEVER
+  DATE
+  OCCURRENCES
+}
+
+enum EventAgeRestriction {
+  ALL
+  FAMILY
+  KIDS
+  TEENS
+  ADULTS
+  ADULTS21
+}
+
+// uuid String? @unique @default(uuid())
+
+model EventModel {
+  id                       Int                       @id @default(autoincrement())
+  name                     String?
+  slug                     String?                   @unique
+  step                     Int?
+  visibility               EventVisibility?          @default(PUBLIC)
+  description              String?
+  ageRestriction           EventAgeRestriction?
+  userId                   Int?
+  user                     User?                     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  eventDays                EventDay[]
+  eventVenues              EventVenue[]
+  eventAssets              EventAsset[]
+  eventModuleActivations   EventModuleActivation[]
+  eventFeatures            EventFeature[]
+  eventGuests              EventGuest[]
+  eventFaqs                EventFaq[]
+  eventCategoryAssignments EventCategoryAssignment[]
+  createdAt                DateTime?                 @default(now())
+  updatedAt                DateTime?                 @updatedAt
+}
+
+model EventDay {
+  id                      Int                    @id @default(autoincrement())
+  slug                    String?                @unique
+  eventDateType           EventDateType?
+  eventDate               DateTime?
+  timezone                String?
+  startTime               String?
+  endTime                 String?
+  eventRecurringPattern   EventRecurringPattern?
+  eventRecurringEnd       EventRecurringEnd?
+  recurringEndDate        DateTime?
+  recurringEndOccurrences Int?
+  eventModelId            Int?
+  eventModel              EventModel?            @relation(fields: [eventModelId], references: [id], onDelete: Cascade)
+  createdAt               DateTime?              @default(now())
+  updatedAt               DateTime?              @updatedAt
+}
+
+enum EventVenueType {
+  PHYSICAL
+  VIRTUAL
+  HYBRID
+}
+
+model EventVenue {
+  id               Int            @id @default(autoincrement())
+  name             String?
+  slug             String?        @unique
+  address          String?
+  placeId          String?
+  latitude         Decimal?
+  longitude        Decimal?
+  formattedAddress String?
+  virtualLink      String?
+  virtualLinkPass  String?
+  venueType        EventVenueType @default(PHYSICAL)
+  eventModelId     Int?
+  eventModel       EventModel?    @relation(fields: [eventModelId], references: [id], onDelete: Cascade)
+  createdAt        DateTime?      @default(now())
+  updatedAt        DateTime?      @updatedAt
+}
+
+model EventCategory {
+  id                       Int                       @id @default(autoincrement())
+  name                     String?
+  slug                     String?                   @unique
+  description              String?
+  eventCategoryAssignments EventCategoryAssignment[]
+  createdAt                DateTime?                 @default(now())
+  updatedAt                DateTime?                 @updatedAt
+}
+
+model EventCategoryAssignment {
+  eventModelId    Int
+  eventModel      EventModel?    @relation(fields: [eventModelId], references: [id], onDelete: Cascade)
+  eventCategoryId Int
+  category        EventCategory? @relation(fields: [eventCategoryId], references: [id], onDelete: Cascade)
+
+  @@id([eventModelId, eventCategoryId])
+}
+
+model EventAsset {
+  id           Int         @id @default(autoincrement())
+  name         String?
+  slug         String?     @unique
+  type         String?
+  description  String?
+  size         Int?
+  eventModelId Int?
+  eventModel   EventModel? @relation(fields: [eventModelId], references: [id], onDelete: Cascade)
+  createdAt    DateTime?   @default(now())
+  updatedAt    DateTime?   @updatedAt
+}
+
+model EventModule {
+  id                     Int                     @id @default(autoincrement())
+  name                   String?
+  slug                   String?                 @unique
+  description            String?
+  price                  Int?
+  optionOne              String?
+  optionTwo              String?
+  optionThree            String?
+  parentId               Int?
+  parent                 EventModule?            @relation("EventModuleToEventModule", fields: [parentId], references: [id], onDelete: Cascade)
+  children               EventModule[]           @relation("EventModuleToEventModule")
+  createdAt              DateTime?               @default(now())
+  updatedAt              DateTime?               @updatedAt
+  eventModuleActivations EventModuleActivation[]
+}
+
+model EventModuleActivation {
+  eventModelId  Int
+  eventModel    EventModel  @relation(fields: [eventModelId], references: [id], onDelete: Cascade)
+  eventModuleId Int
+  eventModule   EventModule @relation(fields: [eventModuleId], references: [id], onDelete: Cascade)
+
+  @@id([eventModelId, eventModuleId])
+}
+
+enum EventFeatureType {
+  NONE
+  SINGLE_WEEK
+  EVERY_WEEK
+}
+
+model EventFeature {
+  id              Int               @id @default(autoincrement())
+  slug            String?           @unique
+  eventModelId    Int?
+  eventModel      EventModel?       @relation(fields: [eventModelId], references: [id], onDelete: Cascade)
+  featureType     EventFeatureType?
+  startDate       DateTime?
+  endDate         DateTime?
+  price           Int?
+  nextBillingDate DateTime?
+  autoRenew       Boolean?
+  createdAt       DateTime?         @default(now())
+  updatedAt       DateTime?         @updatedAt
+}
+
+model EventGuest {
+  id           Int         @id @default(autoincrement())
+  slug         String?     @unique
+  name         String?
+  role         String?
+  description  String?
+  linkedInUrl  String?
+  twitterUrl   String?
+  websiteUrl   String?
+  avatar       String?
+  eventModelId Int?
+  eventModel   EventModel? @relation(fields: [eventModelId], references: [id], onDelete: Cascade)
+  createdAt    DateTime?   @default(now())
+  updatedAt    DateTime?   @updatedAt
+}
+
+model EventFaq {
+  id           Int         @id @default(autoincrement())
+  slug         String?     @unique
+  question     String?
+  answer       String?
+  eventModelId Int?
+  eventModel   EventModel? @relation(fields: [eventModelId], references: [id], onDelete: Cascade)
+  createdAt    DateTime?   @default(now())
+  updatedAt    DateTime?   @updatedAt
+}

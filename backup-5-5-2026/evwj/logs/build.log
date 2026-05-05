@@ -1,0 +1,19 @@
+   ▲ Next.js 16.0.7 (Turbopack)
+   - Environments: .env
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 13.1s
+   Running TypeScript ...
+Failed to compile.
+
+./app/(web)/(general)/_private/WebHomeComponent.tsx:12:8
+Type error: Cannot find name 'HomeDomeGalleryComponent'.
+
+[0m [90m 10 |[39m        [33m<[39m[33mHomeHeroSection[39m [33m/[39m[33m>[39m
+ [90m 11 |[39m       [33m<[39m[33mHomeFilteredEventsComponent[39m [33m/[39m[33m>[39m
+[31m[1m>[22m[39m[90m 12 |[39m       [33m<[39m[33mHomeDomeGalleryComponent[39m [33m/[39m[33m>[39m
+ [90m    |[39m        [31m[1m^[22m[39m
+ [90m 13 |[39m       [33m<[39m[33mHomeEventSearcSection[39m [33m/[39m[33m>[39m  
+ [90m 14 |[39m     [33m<[39m[33m/[39m[33mmain[39m[33m>[39m
+ [90m 15 |[39m   )[33m;[39m[0m
+Next.js build worker exited with code: 1 and signal: null

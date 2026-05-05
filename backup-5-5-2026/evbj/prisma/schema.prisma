@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "./generated"
+}
+
+datasource db {
+  provider = "postgresql"
+  // url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int       @id @default(autoincrement())
+  email         String?   @unique
+  username      String?   @unique
+  firstname     String?
+  lastname      String?
+  password      String?
+  countryCode   String?
+  phone         String?
+  agreedTerms   Boolean?
+  avatar        String?
+  googleId      String?
+  facebookId    String?
+  linkedinId    String?
+  appleId       String?
+  emailVerified Boolean?
+  createdAt     DateTime? @default(now())
+  updatedAt     DateTime? @updatedAt
+  sessions      Session[]
+  otps          OTP[]
+  // clerkId              String                   @unique
+  // sessions             Session[]
+  // eventModels          EventModel[]
+  // organizationMembers  OrganizationMember[]
+  // notifications        Notification[]
+  // createdOrganizations Organization[]           @relation("OrganizationCreator")
+  // sentInvitations      OrganizationInvitation[] @relation("Inviter")
+  // receivedInvitations  OrganizationInvitation[] @relation("InvitedUser")
+  // formFieldTypes       FormFieldType[]
+}
+
+model Session {
+  id        Int       @id @default(autoincrement())
+  token     String?   @unique
+  expiresAt DateTime?
+  userId    Int?
+  user      User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
+}
+
+model OTP {
+  id        Int       @id @default(autoincrement())
+  token     String?   @unique
+  expiresAt DateTime?
+  userId    Int?
+  user      User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
+}

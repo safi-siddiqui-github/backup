@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>YOLO Object Detection</title>
+</head>
+<body>
+    <h1>YOLO Object Detection</h1>
+
+    <video id="video" width="640" height="480" autoplay></video>
+    <canvas id="canvas" width="640" height="480"></canvas>
+
+    <script>
+        const video = document.getElementById("video");
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => { video.srcObject = stream; });
+
+        async function sendFrame() {
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            canvas.toBlob(async (blob) => {
+                const formData = new FormData();
+                formData.append("file", blob, "frame.jpg");
+
+                const res = await fetch("/yolo-detect", {
+                    method: "POST",
+                    body: formData
+                });
+
+                const data = await res.json();
+
+                // Draw bounding boxes
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                data.detections.forEach(det => {
+                    const [x1, y1, x2, y2] = det.box;
+
+                    ctx.strokeStyle = "red";
+                    ctx.lineWidth = 2;
+                    ctx.strokeRect(x1, y1, x2 - x1, y2 - y1);
+
+                    ctx.fillStyle = "red";
+                    ctx.font = "18px Arial";
+                    ctx.fillText(det.label + " " + Math.round(det.confidence*100)+'%', x1, y1 - 5);
+                });
+
+            }, "image/jpeg");
+        }
+
+        setInterval(sendFrame, 400);
+    </script>
+</body>
+</html>

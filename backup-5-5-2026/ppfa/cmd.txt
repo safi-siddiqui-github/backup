@@ -1,0 +1,17 @@
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+uvicorn main:app --host 0.0.0.0 --port $PORT
+deactivate
+python -m pip install --upgrade pip
+
+uvicorn main:app --reload
+
+ps aux | grep uvicorn
+pc      116602  0.1  ... uvicorn main:app --reload
+
+kill -9 116602  118635
+
+pkill -f uvicorn
+
+pip freeze > requirements.txt
