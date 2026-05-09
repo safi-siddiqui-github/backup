@@ -1,0 +1,6 @@
+{
+    "singleAttributePerLine": true,
+    "plugins": [
+        "prettier-plugin-organize-imports"
+    ]
+}

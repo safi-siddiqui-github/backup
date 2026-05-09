@@ -1,0 +1,598 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated"
+  //   binaryTargets = ["native", "rhel-openssl-1.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             Int             @id @default(autoincrement())
+  clerkId        String          @unique
+  email          String          @unique
+  firstname      String?
+  lastname       String?
+  //
+  events         Event[]
+  formFieldTypes FormFieldType[]
+  //
+  createdAt      DateTime?       @default(now())
+  updatedAt      DateTime?       @updatedAt
+}
+
+model Category {
+  id            Int        @id @default(autoincrement())
+  slug          String     @unique
+  name          String
+  description   String?
+  //
+  parentId      Int?
+  parent        Category?  @relation("CategoryHierarchy", fields: [parentId], references: [id], onDelete: Cascade)
+  subCategories Category[] @relation("CategoryHierarchy")
+  events        Event[]
+  //
+  createdAt     DateTime?  @default(now())
+  updatedAt     DateTime?  @updatedAt
+}
+
+enum Timezone {
+  NONE
+  UTC
+
+  // North America
+  EASTERN
+  CENTRAL
+  MOUNTAIN
+  PACIFIC
+  ALASKA
+  HAWAII
+
+  // South America
+  ARGENTINA
+  BRAZIL
+  CHILE
+
+  // Europe
+  LONDON
+  DUBLIN
+  LISBON
+  PARIS
+  BERLIN
+  ROME
+  MADRID
+  AMSTERDAM
+  VIENNA
+  STOCKHOLM
+  OSLO
+  COPENHAGEN
+  HELSINKI
+  ISTANBUL
+  ATHENS
+  MOSCOW
+
+  // Africa
+  LAGOS
+  JOHANNESBURG
+  NAIROBI
+  CAIRO
+  CASABLANCA
+
+  // Middle East
+  DUBAI
+  RIYADH
+  TEHRAN
+  JERUSALEM
+
+  // South Asia
+  KARACHI
+  DELHI
+  COLOMBO
+  DHAKA
+
+  // East Asia
+  BANGKOK
+  SINGAPORE
+  HONGKONG
+  TAIPEI
+  TOKYO
+  SEOUL
+  BEIJING
+
+  // Oceania
+  SYDNEY
+  MELBOURNE
+  AUCKLAND
+  FIJI
+}
+
+enum VenueType {
+  NONE
+  PHYSICAL
+  VIRTUAL
+  HYBRID
+  CUSTOM
+}
+
+enum RecurringPattern {
+  NONE
+  DAILY
+  WEEKLY
+  MONTHLY
+  YEARLY
+  CUSTOM
+}
+
+enum RecurringEnd {
+  NONE
+  WEEKLY
+  AFTEROCCURENCE
+  UNTILDATE
+  CUSTOM
+}
+
+enum LaunchStrategy {
+  NONE
+  DRAFT
+  SOFT
+  LAUNCH
+  CUSTOM
+}
+
+enum Color {
+  NONE
+  RED
+  BLUE
+  GREEN
+  PURPLE
+  YELLOW
+  PINK
+  INDIGO
+  ORANGE
+}
+
+enum RsvpResponse {
+  NONE
+  YESNO
+  YESNOMAYBE
+  CUSTOM
+}
+
+enum RsvpPlatform {
+  NONE
+  AMAZON
+  TARGET
+  WALMART
+  BEDBATHBEYOND
+  WILLIAMSSONOMA
+  HONEYMOONFUND
+  CUSTOM
+}
+
+enum RsvpTemplate {
+  NONE
+  DEFAULT
+  FORMAL
+  CASUAL
+  MODERN
+  CUSTOM
+}
+
+enum RsvpReminder {
+  NONE
+  STANDARD
+  FREQUENT
+  MINIMAL
+  CUSTOM
+}
+
+enum ScheduleMode {
+  NONE
+  SIMPLE
+  CONFERENCE
+}
+
+// model Venue {
+//   id          Int        @id @default(autoincrement())
+//   slug        String     @unique
+//   name        String
+//   capacity    Int?
+//   feature     String?
+//   isPrimary   Boolean?   @default(false)
+//   //
+//   venueTypeId Int?
+//   venueType   VenueType? @relation(fields: [venueTypeId], references: [id], onDelete: Cascade)
+//   //
+//   events      Event[]
+// }
+
+model Event {
+  id             Int             @id @default(autoincrement())
+  slug           String          @unique
+  name           String?
+  description    String?
+  isDraft        Boolean?        @default(false)
+  isPublic       Boolean?        @default(true)
+  step           Int?
+  // 
+  // startDate           DateTime?
+  // endDate             DateTime?
+  // startTime           String?
+  // endTime             String?
+  // isMultiDayEvent     Boolean?          @default(false)
+  //
+  // isRecurringEvent    Boolean?          @default(false)
+  // recurringRepeat     Int?
+  // recurringOccerrence Int?
+  // recurringEndDate    DateTime?
+  //
+  isVenueEnabled Boolean?        @default(false)
+  venueName      String?
+  venueCapacity  Int?
+  venueFeature   String?
+  venueAddress   String?
+  venueLink      String?
+  venueType      VenueType?
+  //
+  // timezone            Timezone?
+  // recurringPattern    RecurringPattern?
+  // recurringEnd        RecurringEnd?
+  launchStrategy LaunchStrategy?
+  //
+  hostId         Int?
+  host           User?           @relation(fields: [hostId], references: [id], onDelete: Cascade)
+  categoryId     Int?
+  category       Category?       @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  //
+  modules        Module[]
+  //
+  createdAt      DateTime?       @default(now())
+  updatedAt      DateTime?       @updatedAt
+}
+
+model ModuleCategory {
+  id            Int              @id @default(autoincrement())
+  slug          String           @unique
+  name          String
+  description   String?
+  optionOne     String?
+  optionTwo     String?
+  optionThree   String?
+  price         Int?
+  //
+  parentId      Int?
+  parent        ModuleCategory?  @relation("CategoryHierarchy", fields: [parentId], references: [id], onDelete: Cascade)
+  subCategories ModuleCategory[] @relation("CategoryHierarchy")
+  modules       Module[]
+  // 
+  createdAt     DateTime?        @default(now())
+  updatedAt     DateTime?        @updatedAt
+}
+
+model Module {
+  id                               Int               @id @default(autoincrement())
+  slug                             String            @unique
+  isActive                         Boolean?          @default(true)
+  //
+  rsvpDeadline                     DateTime?
+  rsvpCapacityLimit                Int?
+  rsvpPlusOneLimit                 Int?
+  rsvpAllowPlusOne                 Boolean?
+  rsvpEnableWaitlist               Boolean?
+  rsvpCollectDietryInformation     Boolean?
+  rsvpEnableCustomField            Boolean?
+  rsvpPublicRegistration           Boolean?
+  rsvpRequireApproval              Boolean?
+  rsvpAutomaticReminder            Boolean?
+  rsvpGiftName                     String?
+  rsvpGiftUrl                      String?
+  rsvpGiftDescription              String?
+  rsvpCommunicationMessage         String?
+  rsvpCommunicationSmsNotification Boolean?
+  rsvpResponse                     RsvpResponse?
+  rsvpPlatform                     RsvpPlatform?
+  rsvpTemplate                     RsvpTemplate?
+  rsvpReminder                     RsvpReminder?
+  //
+  scheduleMode                     ScheduleMode?
+  //
+  categoryId                       Int?
+  category                         ModuleCategory?   @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  eventId                          Int?
+  event                            Event?            @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  //
+  guestGroups                      GuestGroup[]
+  guestLists                       GuestList[]
+  formFields                       FormField[]
+  scheduleDays                     ScheduleDay[]
+  scheduleTracks                   ScheduleTrack[]
+  scheduleSessions                 ScheduleSession[]
+  seatingObjects                   SeatingObject[]
+  seatingCanvases                  SeatingCanvas[]
+  // 
+  createdAt                        DateTime?         @default(now())
+  updatedAt                        DateTime?         @updatedAt
+
+  @@unique([categoryId, eventId])
+}
+
+model GuestGroup {
+  id             Int             @id @default(autoincrement())
+  slug           String          @unique
+  name           String?
+  description    String?
+  memberLimit    Int?
+  //
+  moduleId       Int?
+  module         Module?         @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  color          Color?
+  //
+  guestLists     GuestList[]
+  seatingObjects SeatingObject[]
+  // 
+  createdAt      DateTime?       @default(now())
+  updatedAt      DateTime?       @updatedAt
+}
+
+model GuestList {
+  id                Int             @id @default(autoincrement())
+  slug              String          @unique
+  name              String?
+  email             String?
+  phone             String?
+  plusOne           Int?
+  dietryRestriction String?
+  note              String?
+  //
+  moduleId          Int?
+  module            Module?         @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  guestGroupId      Int?
+  guestGroup        GuestGroup?     @relation(fields: [guestGroupId], references: [id], onDelete: Cascade)
+  seatingObjects    SeatingObject[]
+  // 
+  createdAt         DateTime?       @default(now())
+  updatedAt         DateTime?       @updatedAt
+}
+
+enum FormFieldTypeEnum {
+  TEXT
+  TEXTAREA
+  RADIO
+  SELECT
+  CHECKBOX
+}
+
+model FormFieldType {
+  id          Int                @id @default(autoincrement())
+  slug        String             @unique
+  name        String?
+  isRequired  Boolean?
+  placeholder String?
+  type        FormFieldTypeEnum?
+  //
+  userId      Int?
+  user        User?              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  options     FormOption[]
+  // 
+  createdAt   DateTime?          @default(now())
+  updatedAt   DateTime?          @updatedAt
+}
+
+model FormField {
+  id          Int                @id @default(autoincrement())
+  slug        String             @unique
+  name        String?
+  isRequired  Boolean?
+  placeholder String?
+  type        FormFieldTypeEnum?
+  order       Int?
+  //
+  moduleId    Int?
+  module      Module?            @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  options     FormOption[]
+  // 
+  createdAt   DateTime?          @default(now())
+  updatedAt   DateTime?          @updatedAt
+}
+
+model FormOption {
+  id              Int            @id @default(autoincrement())
+  slug            String         @unique
+  name            String?
+  //
+  formFieldTypeId Int?
+  formFieldType   FormFieldType? @relation(fields: [formFieldTypeId], references: [id], onDelete: Cascade)
+  formFieldId     Int?
+  formField       FormField?     @relation(fields: [formFieldId], references: [id], onDelete: Cascade)
+  // 
+  createdAt       DateTime?      @default(now())
+  updatedAt       DateTime?      @updatedAt
+}
+
+enum ScheduleAgenda {
+  NONE
+  REGISTRATION
+  WELCOME
+  KEYNOTE
+  SESSION
+  WORKSHOP
+  BREAK
+  LUNCH
+  DINNER
+  NETWORKING
+  RECEPTION
+  ENTERTAINMENT
+  CLOSING
+  CHECKOUT
+  TRANSPORTATION
+  CUSTOM
+}
+
+enum ScheduleNotification {
+  NONE
+  MINUTE5
+  MINUTE10
+  MINUTE15
+  MINUTE30
+  HOUR1
+  HOUR2
+  HOUR4
+  DAY1
+  CUSTOM
+}
+
+model ScheduleDay {
+  id               Int               @id @default(autoincrement())
+  slug             String            @unique
+  name             String?
+  day              DateTime?
+  //
+  moduleId         Int?
+  module           Module?           @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  scheduleItems    ScheduleItem[]
+  scheduleSessions ScheduleSession[]
+  // 
+  createdAt        DateTime?         @default(now())
+  updatedAt        DateTime?         @updatedAt
+}
+
+model ScheduleItem {
+  id                   Int                   @id @default(autoincrement())
+  slug                 String                @unique
+  name                 String?
+  description          String?
+  startTime            String?
+  endTime              String?
+  scheduleAgenda       ScheduleAgenda?
+  scheduleNotification ScheduleNotification?
+  notificationMessage  String?
+  timezone             Timezone?
+  //
+  scheduleDayId        Int?
+  scheduleDay          ScheduleDay?          @relation(fields: [scheduleDayId], references: [id], onDelete: Cascade)
+  // 
+  createdAt            DateTime?             @default(now())
+  updatedAt            DateTime?             @updatedAt
+}
+
+model ScheduleTrack {
+  id               Int               @id @default(autoincrement())
+  slug             String            @unique
+  name             String?
+  description      String?
+  color            Color?
+  //
+  moduleId         Int?
+  module           Module?           @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  scheduleSessions ScheduleSession[]
+  // 
+  createdAt        DateTime?         @default(now())
+  updatedAt        DateTime?         @updatedAt
+}
+
+enum SkillLevel {
+  ALL
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+model ScheduleSession {
+  id              Int             @id @default(autoincrement())
+  slug            String          @unique
+  name            String?
+  description     String?
+  scheduleAgenda  ScheduleAgenda?
+  startTime       String?
+  endTime         String?
+  capacity        Int?
+  skillLevel      SkillLevel?
+  timezone        Timezone?
+  //
+  location        String?
+  speaker         String?
+  tag             String?
+  //
+  moduleId        Int?
+  module          Module?         @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  scheduleTrackId Int?
+  scheduleTrack   ScheduleTrack?  @relation(fields: [scheduleTrackId], references: [id], onDelete: Cascade)
+  scheduleDayId   Int?
+  scheduleDay     ScheduleDay?    @relation(fields: [scheduleDayId], references: [id], onDelete: Cascade)
+  // 
+  createdAt       DateTime?       @default(now())
+  updatedAt       DateTime?       @updatedAt
+}
+
+enum SeatingType {
+  TABLE
+  CHAIR
+  STAGE
+  PODIUM
+  EXIT
+  DANCEFLOOR
+}
+
+enum TableShape {
+  ROUND
+  RECTANGLE
+  // LONG
+}
+
+enum ChairLayout {
+  SINGLE
+  GRID
+}
+
+model SeatingObject {
+  id             Int             @id @default(autoincrement())
+  slug           String          @unique
+  name           String?
+  note           String?
+  horizontalAxis Int?
+  verticalAxis   Int?
+  width          Int?
+  height         Int?
+  scale          Int?            @default(1)
+  tableShape     TableShape?
+  seatingType    SeatingType?
+  // isActive       Boolean?        @default(true)
+  chairLayout    ChairLayout?
+  rows           Int?
+  columns        Int?
+  //
+  moduleId       Int?
+  module         Module?         @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  guestGroupId   Int?
+  guestGroup     GuestGroup?     @relation(fields: [guestGroupId], references: [id], onDelete: Cascade)
+  parentId       Int?
+  parent         SeatingObject?  @relation("CategoryHierarchy", fields: [parentId], references: [id], onDelete: Cascade)
+  subObjects     SeatingObject[] @relation("CategoryHierarchy")
+  guestListId    Int?
+  guestList      GuestList?      @relation(fields: [guestListId], references: [id], onDelete: Cascade)
+
+  // 
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
+}
+
+model SeatingCanvas {
+  id        Int       @id @default(autoincrement())
+  slug      String    @unique
+  name      String?
+  body      Json?
+  // 
+  moduleId  Int?
+  module    Module?   @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  // 
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
+}
