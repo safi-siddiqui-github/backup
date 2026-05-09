@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4" defer></script>
+    <script src="./app.js" defer></script>
+
+</head>
+
+<body class="bg-slate-50">
+
+    <div class="p-4 text-center bg-black font-medium">
+
+        <span class="text-blue-500">BUDGET</span>
+        <span class="italic text-white">APP</span>
+
+    </div>
+
+    <div class="py-10 flex flex-row items-start justify-center gap-10">
+
+        <div class="flex flex-col w-full max-w-sm bg-white shadow-xl rounded-md overflow-hidden">
+
+            <div class="flex flex-col gap-2 p-6 bg-slate-200 items-center">
+
+                <p class="font-medium text-xl">
+                    YOUR BALANCE
+                </p>
+
+                <p class="font-semibold text-2xl">
+                    5000
+                </p>
+
+            </div>
+
+            <div class="p-4 flex flex-col gap-8">
+
+                <div class="flex items-center justify-evenly border border-slate-200 rounded">
+
+                    <div class="flex flex-col items-center">
+                        <p class="font-medium">
+                            INCOME
+                        </p>
+                        <p>5000</p>
+                    </div>
+
+                    <div class="h-24 border border-slate-200">
+
+                    </div>
+
+                    <div class="flex flex-col items-center">
+                        <p class="font-medium">
+                            EXPENSES
+                        </p>
+                        <p>5000</p>
+                    </div>
+
+                </div>
+
+                <div class="flex flex-col">
+                    <label for="desc" class="font-medium">
+                        Description
+                    </label>
+                    <input type="text" id="desc" class="w-full border rounded border-slate-200 px-2 py-1"
+                        placeholder="Amount is for ...">
+                </div>
+
+                <div class="flex flex-col">
+                    <label for="amount" class="font-medium">
+                        Amount
+                    </label>
+                    <input type="text" id="amount" class="w-full border rounded border-slate-200 px-2 py-1"
+                        placeholder="+, -, 000">
+
+                    <div class="flex flex-col p-2">
+                        <p class="text-sm">
+                            Use + for positive amount
+                        </p>
+                        <p class="text-sm">
+                            Use - for negative amount
+                        </p>
+                    </div>
+
+                </div>
+
+                <button class="w-full text-center font-medium bg-teal-900 text-white py-2 rounded-md">
+                    Process Amount
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="flex flex-col w-full max-w-sm bg-white shadow-xl rounded-md overflow-hidden">
+
+            <div class="flex flex-col gap-2 p-6 bg-blue-200 items-center">
+
+                <p class="font-medium text-xl">
+                    TRANSACTIONS
+                </p>
+
+                <p class="font-semibold text-2xl">
+                    2
+                </p>
+
+            </div>
+
+            <div class="p-4 flex flex-col gap-4">
+
+                <div class="flex justify-between border-r-4 border-green-500 pr-4">
+                    <p class="">
+                        Salary
+                    </p>
+
+                    <p>
+                        +5000
+                    </p>
+
+                </div>
+
+                <div class="flex justify-between border-r-4 border-red-500 pr-4">
+                    <p class="">
+                        Shopping
+                    </p>
+
+                    <p>
+                        -1000
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</body>
+
+</html>
