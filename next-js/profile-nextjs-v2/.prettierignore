@@ -1,0 +1,29 @@
+# .prettierignore
+
+# Node dependencies
+node_modules
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Build output
+.next
+out
+
+# Vercel output
+.vercel
+
+# Environment variables
+.env*
+!.env.example
+
+# Public files
+public/static
+public/**/*.min.*
+
+# Misc
+dist
+coverage
+*.log
+
+# npm install -D --save-exact prettier prettier-plugin-tailwindcss prettier-plugin-organize-imports
