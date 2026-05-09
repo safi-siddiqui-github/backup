@@ -1,0 +1,31 @@
+services:
+  mysql-database:
+    image: mysql:9
+    environment:
+      MYSQL_ROOT_PASSWORD: my-secret-pw
+      MYSQL_DATABASE: mydb
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql-database-volume:/var/lib/mysql
+    restart: always
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      retries: 5
+      start_period: 10s
+
+  phpmyadmin-database-manager:
+    image: phpmyadmin:5
+    environment:
+      PMA_HOST: mysql-database
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: my-secret-pw
+    ports:
+      - 8080:80
+    depends_on:
+      mysql-database:
+        condition: service_healthy  # Ensures MySQL is ready before starting phpMyAdmin
+
+volumes:
+  mysql-database-volume:

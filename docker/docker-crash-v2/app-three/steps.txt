@@ -1,0 +1,39 @@
+Run nginx web server at 8080
+
+Build php image with extensions
+    php-fpm is for nginx
+    alpine is for minimal linux setup
+
+    we can build image seperately
+    cmd: docker build -t app-three-php-app -f php/Dockerfile . 
+    cmd: docker build -t safi:php81 -f php/Dockerfile . 
+
+docker compose ps
+    get the name of the container
+
+docker exec -it app-three-nginx-web-server-1 sh
+    open shell in the container
+
+cat /etc/nginx/conf.d/default.conf
+    -- nginx default configs
+
+the root folder here is app-three
+Then create a folder in root as /app/public with index.php
+the nginx folder was /etc/nginx/conf.d/default.conf, so create one in root 
+set the config file
+
+php-fpm
+    nginx doenst handle php-processing directly so it relies on a seperate php processor
+    to handle php reqeusts
+
+        server_name  localhost; 
+            -- safi-siddiqui.com www.safi-siddiqui.com
+        
+        fastcgi_pass   app:9000;
+            -- the app is the actual ip address
+            -- and port is 9000 for our php backend
+
+Then we mount the nginx to its deafult folder and app folder to working directory /var/www/html container using volume
+
+When we ur the script the vendor folder is installed but dur to mounting from app folder it removes it
+

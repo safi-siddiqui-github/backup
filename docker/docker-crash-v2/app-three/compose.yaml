@@ -1,0 +1,62 @@
+services:
+  web:
+    # Prod
+    # build: .
+    # dockerfile: ./docker/nginx/Dockerfile
+    
+    # Dev
+    image: nginx:1-alpine
+    volumes:
+      - ./docker/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+
+    ports:
+      - "8080:80"
+
+
+  app:
+    build:
+      context: .
+      dockerfile: ./docker/php/Dockerfile
+      
+    # Prod: No Mounting only building
+    # Dev
+    volumes:
+      - ./app:/var/www/html
+      - /var/www/html/vendor # Mount vendor
+
+
+  db:
+    image: mysql:9
+    restart: unless-stopped
+    
+    # Prod: No ports exposd
+    # Dev
+    ports:
+      - "3306:3306"
+      
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/my.conf:/etc/mysql/my.conf
+      
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+
+  phpmyadmin:
+    image: phpmyadmin:5
+    restart: unless-stopped
+    environment:
+      PMA_HOST: ${PMA_HOST}
+      PMA_PORT: ${MYSQL_PORT}
+      PMA_USER: ${MYSQL_USER} # Directly Login User
+      PMA_PASSWORD: ${MYSQL_PASSWORD} # DLU
+      # MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    ports:
+      - "8081:80"
+    depends_on:
+      - db
+
+volumes:
+  mysql_data:

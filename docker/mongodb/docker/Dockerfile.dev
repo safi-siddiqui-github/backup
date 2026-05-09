@@ -1,0 +1,5 @@
+FROM mongodb/mongodb-community-server:5.0.22-ubuntu2004
+
+VOLUME [ "mongodb-data" ]
+
+EXPOSE 27017

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: osp-svc
+  namespace: osp-ns
+
+spec:
+  selector:
+    app: osp-app
+  ports:
+  - protocol: TCP
+    port: 5173 # service / cluster
+    targetPort: 5173 # pod

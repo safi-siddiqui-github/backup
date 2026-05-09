@@ -1,0 +1,65 @@
+version: '3.9'
+
+services:
+  php_app:
+    build:
+      context: ./docker/php
+      dockerfile: Dockerfile
+    # container_name: php_app
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - ./src:/var/www/html
+    depends_on:
+      - mysql-database
+    networks:
+      - app_two_network
+
+  mysql-database:
+    image: mysql:9
+    # container_name: mysql-database
+    # restart: always
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql-database-volume:/var/lib/mysql
+      - ./docker/mysql/my.cnf:/etc/mysql/my.cnf
+    # healthcheck:
+    #   test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+    #   interval: 10s
+    #   retries: 5
+    #   start_period: 10s
+    networks:
+      - app_two_network
+
+    phpmyadmin-database-manager:
+      image: phpmyadmin:5
+      # container_name: phpmyadmin-database-manager
+      restart: unless-stopped
+      environment:
+        # MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+        PMA_HOST: ${PMA_HOST}
+        PMA_USER: ${PMA_USER}
+        PMA_PASSWORD: ${PMA_PASSWORD}
+        # PMA_PORT: ${PMA_PORT}
+      ports:
+        - 8081:80
+      depends_on:
+        mysql-database: # condition: service_healthy # Ensures MySQL is ready before starting phpMyAdmin
+      networks:
+        - app_two_network
+
+volumes:
+  mysql-database-volume:
+
+
+networks:
+  app_two_network:
+    driver: bridge

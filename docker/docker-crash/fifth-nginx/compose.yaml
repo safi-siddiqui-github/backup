@@ -1,0 +1,69 @@
+# Comments are provided throughout this file to help you get started.
+# If you need more help, visit the Docker Compose reference guide at
+# https://docs.docker.com/go/compose-spec-reference/
+
+# Here the instructions define your application as a service called "server".
+# This service is built from the Dockerfile in the current directory.
+# You can add other services your application may depend on here, such as a
+# database or a cache. For examples, see the Awesome Compose repository:
+# https://github.com/docker/awesome-compose
+services:
+  app-1:
+    build:
+      context: .
+    environment:
+      APP_NAME: APP1
+      NODE_ENV: production
+      LOCAL_URL: http://localhost
+    ports:
+      - 3001:3000
+    develop:
+      watch:
+        - path: ./package.json
+          action: rebuild
+        - path: ./package-lock.json
+          action: rebuild
+        # it'll watch for changes in the frontend directory and sync the changes with the container real time
+        - path: .
+          target: /app
+          action: sync
+
+  app-2:
+    build:
+      context: .
+    environment:
+      APP_NAME: APP2
+      NODE_ENV: production
+      LOCAL_URL: http://localhost
+    ports:
+      - 3002:3000
+    develop:
+      watch:
+        - path: ./package.json
+          action: rebuild
+        - path: ./package-lock.json
+          action: rebuild
+        # it'll watch for changes in the frontend directory and sync the changes with the container real time
+        - path: .
+          target: /app
+          action: sync
+
+  app-3:
+    build:
+      context: .
+    environment:
+      APP_NAME: APP3
+      NODE_ENV: production
+      LOCAL_URL: http://localhost
+    ports:
+      - 3003:3000
+    develop:
+      watch:
+        - path: ./package.json
+          action: rebuild
+        - path: ./package-lock.json
+          action: rebuild
+        # it'll watch for changes in the frontend directory and sync the changes with the container real time
+        - path: .
+          target: /app
+          action: sync
