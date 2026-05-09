@@ -1,0 +1,14 @@
+/home/safi/courses/c#-course/0-welcome/bin/Debug/net8.0/0-welcome
+/home/safi/courses/c#-course/0-welcome/bin/Debug/net8.0/0-welcome.deps.json
+/home/safi/courses/c#-course/0-welcome/bin/Debug/net8.0/0-welcome.runtimeconfig.json
+/home/safi/courses/c#-course/0-welcome/bin/Debug/net8.0/0-welcome.dll
+/home/safi/courses/c#-course/0-welcome/bin/Debug/net8.0/0-welcome.pdb
+/home/safi/courses/c#-course/0-welcome/obj/Debug/net8.0/0-welcome.GeneratedMSBuildEditorConfig.editorconfig
+/home/safi/courses/c#-course/0-welcome/obj/Debug/net8.0/0-welcome.AssemblyInfoInputs.cache
+/home/safi/courses/c#-course/0-welcome/obj/Debug/net8.0/0-welcome.AssemblyInfo.cs
+/home/safi/courses/c#-course/0-welcome/obj/Debug/net8.0/0-welcome.csproj.CoreCompileInputs.cache
+/home/safi/courses/c#-course/0-welcome/obj/Debug/net8.0/0-welcome.dll
+/home/safi/courses/c#-course/0-welcome/obj/Debug/net8.0/refint/0-welcome.dll
+/home/safi/courses/c#-course/0-welcome/obj/Debug/net8.0/0-welcome.pdb
+/home/safi/courses/c#-course/0-welcome/obj/Debug/net8.0/0-welcome.genruntimeconfig.cache
+/home/safi/courses/c#-course/0-welcome/obj/Debug/net8.0/ref/0-welcome.dll

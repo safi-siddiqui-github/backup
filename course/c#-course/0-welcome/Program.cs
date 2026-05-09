@@ -1,0 +1,11 @@
+﻿Console.WriteLine("Hello, World!");
+int age = 55;
+long bigNumber = 55555555;
+long bigNumber2 = 55555555L;
+Console.WriteLine(age);
+Console.WriteLine(int.MaxValue);
+Console.WriteLine(int.MinValue);
+double dblNum = 55.66;
+Console.WriteLine(dblNum);
+float fNum = 55.66000F;
+Console.WriteLine(fNum);
