@@ -1,0 +1,109 @@
+<script setup lang="ts">
+    import { Head, useForm, usePage } from '@inertiajs/vue3';
+    import AuthLayout from '@/vue/default/layout/AuthLayout.vue';
+    import { VerificationNoticeFormDataType } from '@/types/form';
+    import { getRouteUri } from '@/lib/utils';
+    import { LoaderCircle } from 'lucide-vue-next';
+    import { PageDataType } from '@/types/session';
+
+    const { auth } = usePage<PageDataType>().props;
+
+    const form = useForm<Required<VerificationNoticeFormDataType>>({
+        email: auth?.user?.email ?? 'required',
+        pin: '',
+    });
+
+    const handleSubmit = () => {
+        form.post(getRouteUri('verificationNoticePost'));
+    };
+
+    const resendPin = () => {
+        form.post(getRouteUri('verificationNoticeResendPost'));
+    };
+</script>
+
+<template>
+    <Head title="Vue Verification Notice"></Head>
+    <AuthLayout>
+        <div class="flex flex-col gap-6 px-4 py-8">
+            <div class="flex flex-col items-center gap-2">
+                <h2 class="text-2xl">EMAIL VERIFICATION</h2>
+
+                <button
+                    @click="resendPin"
+                    class="flex flex-wrap items-center gap-1 outline-none hover:underline"
+                >
+                    <span class="tracking-tight">Get password reset email?</span>
+                    <span class="font-medium">Resend</span>
+                </button>
+            </div>
+
+            <form
+                @submit.prevent="handleSubmit"
+                class="flex w-full flex-col gap-4"
+            >
+                <div class="flex flex-col gap-1">
+                    <label
+                        for="email"
+                        class="w-fit font-medium"
+                    >
+                        Email
+                    </label>
+
+                    <input
+                        id="email"
+                        type="text"
+                        placeholder="safi@gmail.com"
+                        class="w-full rounded border px-2 py-1"
+                        :value="form.email"
+                        disabled="true"
+                    />
+
+                    <p
+                        class="text-red-500"
+                        v-if="form.errors.email"
+                    >
+                        {{ form.errors?.email?.[0] }}
+                    </p>
+                </div>
+
+                <div class="flex flex-col gap-1">
+                    <label
+                        for="pin"
+                        class="w-fit font-medium"
+                    >
+                        Pin Code
+                    </label>
+
+                    <input
+                        id="pin"
+                        type="text"
+                        placeholder="0000"
+                        class="w-full rounded border px-2 py-1"
+                        v-model="form.pin"
+                    />
+
+                    <p
+                        class="text-red-500"
+                        v-if="form.errors.pin"
+                    >
+                        {{ form.errors?.pin?.[0] }}
+                    </p>
+                </div>
+
+                <button
+                    type="submit"
+                    class="relative flex items-center justify-center gap-2 rounded border py-1 font-medium"
+                    :disabled="form.processing"
+                >
+                    <LoaderCircle
+                        class="absolute right-2 size-4 animate-spin"
+                        v-if="form.processing"
+                    />
+
+                    <span>Verify Email</span>
+                </button>
+            </form>
+        </div>
+    </AuthLayout>
+</template>
