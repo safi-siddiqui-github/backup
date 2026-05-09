@@ -1,0 +1,25 @@
+{
+  "name": "profile",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "git:push": "git add . && git commit -m 'update' && git push",
+    "node:rename": "node script.js",
+    "deploy": "npm run build && npm run node:rename && npm run git:push"
+  },
+  "devDependencies": {
+    "prettier": "^3.5.3",
+    "prettier-plugin-organize-attributes": "^1.0.0",
+    "prettier-plugin-organize-imports": "^4.1.0",
+    "prettier-plugin-tailwindcss": "^0.6.12",
+    "vite": "^6.3.5"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.8",
+    "tailwindcss": "^4.1.8"
+  }
+}
