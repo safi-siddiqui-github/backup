@@ -1,0 +1,35 @@
+Next JS
+docker run -it --rm -w /app --user $(id -u):$(id -g) -v ~/apps:/app node:latest bash
+npx create-next-app@latest next-app
+
+CMDS
+rm -rf ~/apps/next-app/docker
+cp -r ~/apps/docker/nextjs/ ~/apps/next-app/docker 
+
+BUILD DEV
+docker build -t next-app-app:latest -f ~/apps/next-app/docker/Dockerfile.nextjs.dev ~/apps/next-app
+docker run --rm -w /app --user $(id -u):$(id -g) -v ~/apps/next-app:/app -p 3000:3000 next-app-app:latest
+
+BUILD PROD
+// next.config.js
+module.exports = {
+  output: 'standalone',
+}
+docker build -t next-app-app:latest -f ~/apps/next-app/docker/Dockerfile.nextjs.prod ~/apps/next-app
+docker run --rm -p 3000:3000 next-app-app:latest
+
+COMPOSE DEV
+docker compose -f ~/apps/next-app/docker/compose.nextjs.dev.yaml up --watch
+docker compose -f ~/apps/next-app/docker/compose.nextjs.dev.yaml down
+
+COMPOSE DEV
+docker compose -f ~/apps/next-app/docker/compose.nextjs.prod.yaml up
+docker compose -f ~/apps/next-app/docker/compose.nextjs.prod.yaml up --build
+docker compose -f ~/apps/next-app/docker/compose.nextjs.prod.yaml down
+
+CLEANUP
+docker rmi next-app-app
+docker system prune
+
+DELETE
+rm -rf ~/apps/next-app

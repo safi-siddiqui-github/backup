@@ -1,0 +1,18 @@
+{
+  "name": "node-app-one-backend",
+  "version": "1.0.0",
+  "description": "node-app-one-backend",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}

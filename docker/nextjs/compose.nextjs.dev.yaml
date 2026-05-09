@@ -1,0 +1,15 @@
+services:
+  app:
+    # image: ft-dev:latest
+    build:
+      context: ~/apps/next-app
+      dockerfile: docker/Dockerfile.nextjs.dev
+    ports:
+    - 3000:3000
+    develop:
+      watch:
+        - action: sync
+          path: ~/apps/next-app
+          target: /app
+          ignore:
+            - node_modules/

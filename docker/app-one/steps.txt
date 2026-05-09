@@ -1,0 +1,192 @@
+app-one:
+
+    backend:
+
+        Process-1:
+            Need to put files in empty folder using docker 
+
+            P1-Run Command:
+                Short Syntax: 
+                    docker run -it --rm -v $(pwd):/app -w /app node:23-alpine sh
+                        -- -it: runs the image in interactive mode
+                        -- -rm: removes the container after exit
+                        -- -v $(pwd):/app : mounts the current folder to /app folder
+                        -- -w /app : set /app as working directory inside container
+                        -- node:23-alpine sh : runs shell inside container
+
+                Explicit syntax: [Recommended] 
+                    Read-Write (rw): By default 
+                        docker run -it --rm --mount type=bind,source=$(pwd),target=/app -w /app node:23-alpine sh
+                            -- --mount: mount source with target
+
+                            Run Command: Run inside the container
+                                npm init
+                                npm i express
+                    
+                    Readonly (ro): 
+                        docker run -it --rm --mount type=bind,source=$(pwd),target=/app,readonly -w /app node:23-alpine sh
+                
+                Permission User: [Error Fixed]
+                    Fix-1: Container by default creates files with (root:root) user, Wsl user does not have permission to modify it
+
+                            id -u && id -g: [1000, 1000]
+                                -- id -u: gives user id
+                                -- id -g: gives group id
+
+                            docker run -it --rm --mount type=bind,source=$(pwd),target=/app -w /app --user 1000:1000 node:23-alpine sh
+                                -- --user 1000:1000 : user UID/GID , any file created at target will belong to this user
+
+                    Fix-2: Fix ownership of existing files
+                        sudo chown -R $(whoami):$(whoami) /home/safi/app-one/express-backend
+                            -- chown : change file ownership
+                            -- -R : recursive, it means chown command will be applied to specific folder and all subfolders and files inside it
+                            -- $(whoami) : command substitution for current user
+                            -- $(whoami):$(whoami) : username:group
+
+        Process-2:
+            Update index.js with express libs, and create Dockerfile, dockerignore and build image and run container
+
+                P2-Run Command:
+
+                    Production Build: 
+                        Great for one-time production build, in order to update production,
+                        rebuild image, stop and remove container, run new container
+                                            
+                        Build Image:
+                            docker build -t app-one-express-backend-image .
+                                -- -t : tags the image with this name
+                                -- . uses current directory as build context
+
+                        Run Container:
+                            docker run -d -p 3000:3000 --name app-one-express-backend-container app-one-express-backend-image
+                                -- -d : run the container in detached mode
+                                -- -p 3000:3000 : maps container port to local port
+                                -- --name app-one-express-backend-container : names the container
+                        
+                        Stop / Remove / Start Container:
+                            docker stop app-one-express-backend-container
+                            docker rm app-one-express-backend-container
+                            docker start app-one-express-backend-container
+
+                    Development Build:
+                        Instead of rebuilding the image every time, run the container with a bind mount so changes in express-backend reflect inside the container in real-time and remove on exit
+
+                        docker run -it --rm -p 3000:3000 --name app-one-express-backend-container --mount type=bind,source=$(pwd),target=/app -w /app app-one-express-backend-image npm run dev
+
+                        Restart index.js:
+                            Ensure index.js restarts on changes by using nodemon:
+                                npm install --save-dev nodemon
+
+                        Ignore Dockerfile CMD:
+                            -- Because you've provided npm run dev after the image name in the docker run command, the npm run start command from the Dockerfile's CMD will be ignored.  Instead, the container will execute npm run dev.
+                            -- The container will start, and instead of running npm run start (from CMD in the Dockerfile), it will execute npm run dev.
+
+
+    react-frontend:
+
+        Change ownership to user:
+            sudo chown -R $(whoami):$(whoami) /home/safi/app-one/react-frontend
+        
+        Use interactive shell to generate files:
+            docker run -it --rm --mount type=bind,source=$(pwd),target=/app -w /app --user $(id -u):$(id -g) node:23-alpine sh
+            
+                Shell CMD:
+                npm create vite@latest ./
+
+        Dockerfile:
+            Docker alwasy start from first line and builds to the stage specified
+
+        Development:
+            Build Image till dev stage:
+                docker build -t app-one-react-frontend-image --target=dev .
+                
+            Run Container:
+                docker run -it --rm -p 5173:5173 --mount type=bind,source=$(pwd),target=/app -w /app --user $(id -u):$(id -g) app-one-react-frontend-image
+
+        Production:
+            Build Image till prod stage:
+                docker build -t app-one-react-frontend-image --target=prod .
+
+                Run container:
+                    docker run -d -p 80:80 --name app-one-react-frontend-container app-one-react-frontend-image
+
+        Refresh:
+            docker start app-one-react-frontend-container
+            docker stop app-one-react-frontend-container
+            docker rm app-one-react-frontend-container
+            docker image rm app-one-react-frontend-image
+
+
+    mysql-database:
+
+        Without Dockerfile:
+
+            Image:
+                docker pull mysql:9
+
+            Create network:
+                docker network ls
+                docker network app-one-network
+                docker network rm app-one-network
+
+            Run container:
+                docker run -d --name app-one-mysql-database-container --network app-one-network -p 3306:3306 -e MYSQL_ROOT_PASSWORD=secret -e MYSQL_DATABASE=mydb -v app-one-mysql-database-volume:/var/lib/mysql mysql:9
+
+            Execute Commands:
+
+                Bash Terminal:
+                    docker exec -it app-one-mysql-database-container bash
+                        -- docker exec tells Docker you want to execute a command in a running container.
+                        -- -it ensures that the terminal you're accessing is interactive, so you can type commands into it.
+                        -- bash is the command you want to run inside the container. It opens up a bash shell that lets you interact with the container's file system and installed applications.
+
+                            shell commands:
+                                mysql -u root -p secret
+                                show databases;
+                                use mydb;
+                                show tables;
+
+                Single Command:
+                    docker exec app-one-mysql-database-container mysql -u root -psecret -e "CREATE TABLE IF NOT EXISTS mydb.mytable (column_name VARCHAR(255)); INSERT INTO mydb.mytable (column_name) VALUES ('value');"
+                    docker exec app-one-mysql-database-container mysql -u root -psecret -e "INSERT INTO mydb.user (name) VALUES ('sami');"
+                    docker exec app-one-mysql-database-container mysql -u root -psecret -e "SELECT * FROM mydb.user;"
+                    docker exec app-one-mysql-database-container mysql -u root -psecret -e "DESCRIBE mydb.user;"
+                        -- -e "...": This option tells the mysql client to execute the SQL statements within the double quotes
+
+                Mysql terminal:
+                    docker exec -ti app-one-mysql-database-container mysql -u root -psecret
+                        shell commands:
+                            show databases;
+                            use mydb;
+                            create table if not exists user (name varchar(255));
+                            show tables;
+                            insert into user (name) values ('safi');
+                            select * from user;
+
+            Stop / Remove:
+                docker stop app-one-mysql-database-container
+                docker rm app-one-mysql-database-container
+
+        Dockerfile
+            Use a docker file
+
+            Build Image:
+                docker build -t app-one-mysql-database-image .
+                docker image rm app-one-mysql-database-image
+
+            Run container:
+                docker run -d --name app-one-mysql-database-container --network app-one-network -p 3306:3306 -e MYSQL_ROOT_PASSWORD=secret -v app-one-mysql-database-volume:/var/lib/mysql app-one-mysql-database-image
+
+            Executed scripts work without volumes:
+                docker run -d --name app-one-mysql-database-container --network app-one-network -p 3306:3306 -e MYSQL_ROOT_PASSWORD=secret app-one-mysql-database-image
+
+            Commands:
+                docker exec app-one-mysql-database-container mysql -u root -psecret -e "SELECT * FROM mydb.user;"
+
+    phpmyadmin-database-manager:
+
+        Image:
+            docker pull phpmyadmin:5
+
+        Run container:
+            docker run -d --name app-one-phpmyadmin-database-manager-container --network app-one-network -p 8080:80 -e MYSQL_ROOT_PASSWORD=secret -e PMA_HOST=app-one-mysql-database-container phpmyadmin:5

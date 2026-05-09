@@ -1,0 +1,32 @@
+# First Phase
+# Vite installs and build assets
+# 1️ Base Image for Development
+FROM node:23-alpine AS build
+
+WORKDIR /app
+
+COPY package.json package-lock.json* ./
+RUN \
+  if [ -f package-lock.json ]; then npm ci; \
+  else echo "Lockfile not found." && exit 1; \
+  fi
+
+# Copy all files (for build mode)
+COPY . .
+
+RUN npm run build
+
+# Last Phase
+# prod: This stage is the final image for production.
+# It uses Nginx to serve the static files generated in the builder stage.
+# 3️ Production Stage - Serve with Nginx
+FROM nginx:1-alpine AS prod
+
+# Copy build files from builder stage
+COPY --from=build /app/dist /usr/share/nginx/html
+
+# Expose port 80 for Nginx
+EXPOSE 80
+
+# Default command to run Nginx
+CMD ["nginx", "-g", "daemon off;"]
