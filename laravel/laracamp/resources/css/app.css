@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    .sky-btn-small {
+        @apply px-5 py-2 font-semibold text-xs rounded hover:bg-rb-sky-light-hover bg-rb-sky-light tracking-wider text-rb-blue hover:text-white
+    }
+
+    .sky-btn-medium {
+        @apply px-5 py-2 text-sm xl:text-base font-semibold rounded hover:bg-rb-sky-light-hover bg-rb-sky-light tracking-wider text-rb-blue hover:text-white
+    }
+
+    .blue-btn-small {
+        @apply px-5 py-2 font-medium text-xs rounded hover:bg-rb-blue-light-hover bg-rb-blue-light tracking-wide text-white
+    }
+
+    .blue-btn-medium {
+        @apply px-5 py-2 text-sm xl:text-base font-medium rounded hover:bg-rb-blue-light-hover bg-rb-blue-light tracking-wide text-white
+    }
+
+    .text-extra-large {
+        @apply text-3xl xl:text-4xl font-medium
+    }
+
+    .text-large {
+        @apply text-lg md:text-xl lg:text-2xl tracking-wide
+    }
+
+    .text-medium {
+        @apply md:tracking-wide
+    }
+
+    .horizontal-alignment {
+        @apply px-4 md:px-10 lg:px-10 xl:px-16
+    }
+
+    /* Website */
+    .gradient-slate {
+        @apply bg-gradient-to-br from-slate-900 to-slate-800
+    }
+
+    .gradient-red-sky {
+        @apply from-red-900 to-sky-900
+    }
+
+    .gradient-violet-orange {
+        @apply from-violet-500 to-orange-500
+    }
+
+    .gradient-yellow-sky {
+        @apply from-yellow-500 to-sky-500
+    }
+
+    .rounded-left {
+        @apply rounded-tl-lg rounded-bl-lg
+    }
+
+    .rounded-right {
+        @apply rounded-tr-lg rounded-br-lg
+    }
+
+    .btn-black {
+        @apply bg-black font-medium py-2 px-4 text-white rounded text-center
+    }
+
+    .btn-black-outline {
+        @apply font-medium py-2 px-4 rounded text-center border-2 border-black
+    }
+
+    .text-heading {
+        @apply text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-semibold
+    }
+
+    .text-subheading {
+        @apply text-lg sm:text-xl lg:text-2xl xl:text-3xl
+    }
+
+    .text-small {
+        @apply text-sm sm:text-base lg:text-lg
+    }
+
+    .gap-heading {
+        @apply gap-6 sm:gap-10 lg:gap-12
+    }
+
+    .gap-sub-div {
+        @apply gap-10 lg:gap-16 xl:gap-20
+    }
+
+    .padding-sub-div {
+        @apply px-5 md:px-10
+    }
+
+    .side-image-large {
+        @apply h-72 sm:h-96 lg:h-[800px]
+    }
+
+    .side-stripes {
+        @apply h-[850px]
+    }
+
+}
+
+.scrollbar::-webkit-scrollbar-track {
+    /* -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */
+    /* background-color: #F5F5F5; */
+    background-color: #000;
+}
+
+.scrollbar::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+    /* background-color: #F5F5F5; */
+    background-color: transparent;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+    background-color: #000;
+    /* background-color: #ffc9a1; */
+}

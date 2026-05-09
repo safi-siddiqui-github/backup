@@ -1,0 +1,37 @@
+/**
+ * // Vercel Postgres Adapter
+ * datasource db {
+ * provider  = "postgresql"
+ * url       = env("VERCEL_POSTGRES_PRISMA_URL") // uses connection pooling
+ * directUrl = env("VERCEL_POSTGRES_URL_NON_POOLING") // uses a direct connection
+ * }
+ */
+
+// Prisma Postgres
+datasource db {
+  provider = "postgresql"
+  url      = env("PRISMA_POSTGRES_ACCELERATE_DATABASE_URL")
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["prismaSchemaFolder", "driverAdapters"]
+}
+
+model User {
+  id       Int       @id @default(autoincrement())
+  email    String    @unique
+  name     String
+  password String
+  products Product[]
+}
+
+model Product {
+  id          Int     @id @default(autoincrement())
+  title       String
+  price       Int?
+  content     String?
+  isPublished Boolean @default(false)
+  owner       User?   @relation(fields: [ownerId], references: [id])
+  ownerId     Int?
+}
