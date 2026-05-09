@@ -1,0 +1,628 @@
+   ▲ Next.js 15.5.3 (Turbopack)
+
+   Creating an optimized production build ...
+ ✓ Finished writing to disk in 30ms
+ ✓ Compiled successfully in 5.3s
+   Linting and checking validity of types ...
+
+./app/page.tsx
+31:9  Warning: 'navigate' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+35:11  Warning: 'user' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+55:32  Warning: 'user' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/ArrangementSelector.tsx
+52:5  Warning: 'hierarchy' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/AttendingEventDetailView.tsx
+64:11  Warning: 'GuestInfo' is defined but never used.  @typescript-eslint/no-unused-vars
+70:11  Warning: 'EventData' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/BudgetPlanner.tsx
+54:3  Warning: 'onUpdateCategory' is defined but never used.  @typescript-eslint/no-unused-vars
+55:3  Warning: 'onDeleteCategory' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/Chair.tsx
+20:3  Warning: 'onUpdate' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/CheckInSystem.tsx
+53:3  Warning: 'ticketTypes' is defined but never used.  @typescript-eslint/no-unused-vars
+158:14  Warning: 'err' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/CompactNavigationHeader.tsx
+46:31  Warning: 'currentLocationData' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+61:9  Warning: 'selectedLocation' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/ConfirmationStep.tsx
+41:14  Warning: 'err' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/DraggableChair.tsx
+32:3  Warning: 'onUpdateGrid' is defined but never used.  @typescript-eslint/no-unused-vars
+121:6  Warning: React Hook React.useEffect has a missing dependency: 'handleMouseMove'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./components/DraggableTable.tsx
+83:6  Warning: React Hook React.useEffect has a missing dependency: 'handleMouseMove'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./components/EnhancedEventCreationDialog.tsx
+628:9  Warning: 'canProceedFromCurrentStep' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/EnhancedScheduleModule.tsx
+172:30  Warning: 'session' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/EnhancedSeatingModule.tsx
+112:10  Warning: 'showTimeline' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+112:24  Warning: 'setShowTimeline' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+942:3  Warning: 'eventId' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/EventDashboard.tsx
+38:9  Warning: 'navigate' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+79:11  Warning: 'mappedId' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+85:9  Warning: 'moduleMapping' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/ExpenseTracker.tsx
+81:3  Warning: 'vendors' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/GamesModule.tsx
+81:3  Warning: 'eventId' is defined but never used.  @typescript-eslint/no-unused-vars
+146:10  Warning: 'recentGames' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+146:23  Warning: 'setRecentGames' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+147:10  Warning: 'gameHistory' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+147:23  Warning: 'setGameHistory' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/GuestAssignmentPanel.tsx
+32:10  Warning: 'draggedGuest' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/GuestDashboard.tsx
+42:11  Warning: 'EventData' is defined but never used.  @typescript-eslint/no-unused-vars
+90:9  Warning: 'navigate' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/GuestDiscoveryTab.tsx
+70:3  Warning: 'currentGuest' is defined but never used.  @typescript-eslint/no-unused-vars
+71:3  Warning: 'eventId' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/GuestGamesView.tsx
+29:27  Warning: 'event' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/GuestMediaUpload.tsx
+19:36  Warning: 'guest' is defined but never used.  @typescript-eslint/no-unused-vars
+168:23  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+204:13  Warning: Image elements must have an alt prop, either with meaningful text, or an empty string for decorative images.  jsx-a11y/alt-text
+
+./components/GuestSurveyView.tsx
+26:35  Warning: 'guest' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/HostingEventsNavigation.tsx
+47:3  Warning: 'onEventSelect' is defined but never used.  @typescript-eslint/no-unused-vars
+53:3  Warning: 'onEventStatusChange' is defined but never used.  @typescript-eslint/no-unused-vars
+54:3  Warning: 'onEditEvent' is defined but never used.  @typescript-eslint/no-unused-vars
+57:10  Warning: 'selectedFormat' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+57:26  Warning: 'setSelectedFormat' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/Layout.tsx
+30:31  Warning: 'eventData' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/ProfileDropdown.tsx
+21:17  Warning: 'logout' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+23:9  Warning: 'navigate' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+27:29  Warning: 'path' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/PromoCodeManager.tsx
+71:10  Warning: 'editingCode' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+71:23  Warning: 'setEditingCode' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+175:9  Warning: 'getTypeLabel' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/PublicEventCard.tsx
+80:9  Warning: 'handleHostClick' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/PublicProfilePreview.tsx
+217:13  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+631:19  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./components/ReferralCodeManager.tsx
+74:10  Warning: 'editingCode' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+74:23  Warning: 'setEditingCode' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/SeatAssignmentDialog.tsx
+46:9  Warning: 'isIndividualSeat' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/SeatComponent.tsx
+18:3  Warning: 'onUpdate' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/SeatingCanvas.tsx
+72:7  Warning: 'seatSections' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+201:7  Warning: 'seatNumber' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/SeatingModule.tsx
+43:26  Warning: 'eventId' is defined but never used.  @typescript-eslint/no-unused-vars
+290:15  Warning: 'gridChairs' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+858:38  Warning: 'id' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/SectionNavigation.tsx
+36:6  Warning: 'SecitonToDeleteType' is defined but never used.  @typescript-eslint/no-unused-vars
+41:11  Warning: 'hierarchy' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/SendInvitations.tsx
+40:14  Warning: 'err' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/SocialIntegrationDialog.tsx
+51:14  Warning: 'error' is defined but never used.  @typescript-eslint/no-unused-vars
+63:14  Warning: 'error' is defined but never used.  @typescript-eslint/no-unused-vars
+75:14  Warning: 'error' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/Table.tsx
+21:3  Warning: 'onUpdate' is defined but never used.  @typescript-eslint/no-unused-vars
+26:3  Warning: 'onSwapSeats' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/TicketPurchaseDialog.tsx
+284:23  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./components/TicketPurchaseFlow.tsx
+68:10  Warning: 'discount' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+68:20  Warning: 'setDiscount' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/TicketReservationSystem.tsx
+84:10  Warning: 'editingReservation' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+84:30  Warning: 'setEditingReservation' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/TicketTypeManager.tsx
+82:3  Warning: 'orders' is defined but never used.  @typescript-eslint/no-unused-vars
+194:9  Warning: 'ticketForm' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/TicketingSettings.tsx
+40:30  Warning: 'eventId' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/UserDashboard.tsx
+40:9  Warning: 'navigate' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+65:34  Warning: 'setCelebrationAchievement' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+96:39  Warning: 'event' is defined but never used.  @typescript-eslint/no-unused-vars
+183:24  Warning: 'upcomingEvents' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/VendorManager.tsx
+85:3  Warning: 'onUpdateVendor' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/VenueObjectComponent.tsx
+19:3  Warning: 'onUpdate' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/VenueRoomSelector.tsx
+39:3  Warning: 'eventSchedule' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/ai/AutoPilotSystem.tsx
+38:39  Warning: 'onUpdateEvent' is defined but never used.  @typescript-eslint/no-unused-vars
+52:6  Warning: React Hook useEffect has a missing dependency: 'generateAutomationTasks'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./components/ai/ConversationalPlanningCopilot.tsx
+36:53  Warning: 'onUpdateEvent' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/ai/DynamicPricingDisplay.tsx
+30:6  Warning: React Hook useEffect has a missing dependency: 'calculateDynamicPricing'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./components/ai/EventNameSuggestions.tsx
+21:3  Warning: 'description' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/ai/EventOptimizationEngine.tsx
+41:6  Warning: React Hook useEffect has a missing dependency: 'generateOptimizations'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./components/ai/SmartModuleRecommendations.tsx
+30:3  Warning: 'budget' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/analytics/AnnouncementAnalytics.tsx
+33:34  Warning: 'eventId' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/analytics/BudgetAnalytics.tsx
+32:28  Warning: 'eventId' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/analytics/EventAnalytics.tsx
+26:27  Warning: 'eventId' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/analytics/GamesAnalytics.tsx
+26:27  Warning: 'eventId' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/analytics/GuestAnalytics.tsx
+26:27  Warning: 'eventId' is defined but never used.  @typescript-eslint/no-unused-vars
+28:9  Warning: 'guestSegmentData' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+183:9  Warning: 'COLORS' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/analytics/MediaAnalytics.tsx
+26:27  Warning: 'eventId' is defined but never used.  @typescript-eslint/no-unused-vars
+81:15  Warning: Image elements must have an alt prop, either with meaningful text, or an empty string for decorative images.  jsx-a11y/alt-text
+
+./components/analytics/RSVPAnalytics.tsx
+36:26  Warning: 'eventId' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/analytics/ReportsGenerator.tsx
+24:29  Warning: 'eventId' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/analytics/ScheduleAnalytics.tsx
+31:30  Warning: 'eventId' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/analytics/SeatingAnalytics.tsx
+31:29  Warning: 'eventId' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/analytics/SurveyAnalytics.tsx
+37:28  Warning: 'eventId' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/analytics/TicketingAnalytics.tsx
+33:31  Warning: 'eventId' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/auth-demo/StandaloneAuthProvider.tsx
+107:39  Warning: 'password' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/budget/AIExpensePlanner.tsx
+101:25  Warning: 'setEventLocation' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+154:11  Warning: 'season' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+913:6  Warning: React Hook useEffect has missing dependencies: 'allRecommendations.length' and 'generateAIRecommendations'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+
+./components/budget/BudgetAnalyticsDashboard.tsx
+52:10  Warning: 'selectedTimeframe' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+52:29  Warning: 'setSelectedTimeframe' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+57:9  Warning: 'allocatedBudget' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+137:13  Warning: 'avgResponseTime' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/budget/CategoryOverview.tsx
+69:21  Warning: 'spent' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/budget/ComprehensiveBudgetModule.tsx
+98:3  Warning: 'eventId' is defined but never used.  @typescript-eslint/no-unused-vars
+102:3  Warning: 'onBack' is defined but never used.  @typescript-eslint/no-unused-vars
+106:19  Warning: 'setVendors' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+109:10  Warning: 'isLoading' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+109:21  Warning: 'setIsLoading' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+118:9  Warning: 'estimatedCost' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+127:9  Warning: 'proposalCost' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/budget/ContractManagement.tsx
+37:3  Warning: 'milestones' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/budget/EnhancedExpenseTracker.tsx
+77:3  Warning: 'onAddExpense' is defined but never used.  @typescript-eslint/no-unused-vars
+78:3  Warning: 'onUpdateExpense' is defined but never used.  @typescript-eslint/no-unused-vars
+248:23  Warning: 'categoryPlanned' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/budget/EventBudgetPlanner.tsx
+126:10  Warning: 'showTemplate' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+130:6  Warning: React Hook useEffect has a missing dependency: 'generateSmartSuggestions'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+234:9  Warning: 'totalCommitted' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/budget/ModernVendorCard.tsx
+74:13  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+243:13  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./components/budget/ProjectTimelineView.tsx
+77:3  Warning: 'vendor' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/budget/ProposalManagementCenter.tsx
+262:36  Warning: 'negotiationData' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/budget/VendorCommunicationCenter.tsx
+69:9  Warning: 'sortedCommunications' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/budget/VendorCommunicationDetails.tsx
+34:3  Warning: 'communications' is defined but never used.  @typescript-eslint/no-unused-vars
+38:10  Warning: 'messageType' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+38:23  Warning: 'setMessageType' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/budget/VendorContractDetails.tsx
+31:3  Warning: 'vendor' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/budget/VendorManagementHub.tsx
+90:10  Warning: 'activeTab' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+90:21  Warning: 'setActiveTab' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+186:9  Warning: 'activeContracts' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/budget/VendorMarketplace.tsx
+125:10  Warning: 'selectedVendor' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+125:26  Warning: 'setSelectedVendor' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/budget/VendorPaymentDetails.tsx
+60:3  Warning: 'vendor' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/budget/VendorPaymentSchedule.tsx
+349:25  Warning: 'vendor' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/budget/VendorProfileDialog.tsx
+179:23  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./components/budget/VendorTimelineTracker.tsx
+38:25  Warning: 'setSelectedMonth' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+57:9  Warning: 'milestonesByDate' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/conference/EnhancedConferenceCalendar.tsx
+85:13  Warning: 'nextSlotTime' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/conference/SessionBulkOperations.tsx
+201:14  Warning: 'error' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/ecosystem/CommunityHub.tsx
+27:10  Warning: 'activeFilter' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+27:24  Warning: 'setActiveFilter' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+29:26  Warning: 'setFeaturedEvents' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+71:20  Warning: 'setTopHosts' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+104:26  Warning: 'setTrendingTopics' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+167:21  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./components/ecosystem/EnterpriseAnalyticsDashboard.tsx
+42:19  Warning: 'setKpiData' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+51:27  Warning: 'setPerformanceData' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+59:26  Warning: 'setMarketAnalysis' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+66:28  Warning: 'setComplianceStatus' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/ecosystem/EventPortfolioManager.tsx
+35:25  Warning: 'setPortfolioData' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+44:27  Warning: 'setPortfolioTrends' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+53:23  Warning: 'setEventSeries' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/ecosystem/NextGenAI.tsx
+24:20  Warning: 'setAiStatus' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+32:21  Warning: 'setAiMetrics' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+40:29  Warning: 'setAiRecommendations' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+76:28  Warning: 'setLearningInsights' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+99:25  Warning: 'setSentimentData' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/event-creation/AIThemeGenerator.tsx
+73:14  Warning: 'error' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/event-creation/CompactPhotoUpload.tsx
+116:19  Warning: Image elements must have an alt prop, either with meaningful text, or an empty string for decorative images.  jsx-a11y/alt-text
+159:19  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./components/event-creation/EcosystemStep.tsx
+17:26  Warning: 'formData' is defined but never used.  @typescript-eslint/no-unused-vars
+17:36  Warning: 'onUpdate' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/event-creation/EventCardPreview.tsx
+81:13  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+176:11  Warning: 'isVirtual' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+184:13  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./components/event-creation/EventConfigurationStep.tsx
+17:3  Warning: 'onUpdate' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/event-creation/EventPhotoUpload.tsx
+341:19  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./components/event-creation/ExpandableEventDetails.tsx
+92:8  Warning: 'AdditionalDetails' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/event-creation/ModuleCompletionTracker.tsx
+30:3  Warning: 'eventType' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/event-creation/ModuleSelectionStep.tsx
+222:9  Warning: 'applyRecommendations' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+241:9  Warning: 'getAllModules' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/event-creation/PreviewTestingStep.tsx
+33:41  Warning: 'onUpdate' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/event-creation/ProfileImportDialog.tsx
+113:14  Warning: 'err' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/event-creation/SpecialGuestsManager.tsx
+101:9  Warning: 'guestTypes' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/games/GameAnalytics.tsx
+189:43  Warning: 'index' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/games/GameLeaderboard.tsx
+13:28  Warning: 'games' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/games/GuestActiveGame.tsx
+52:3  Warning: 'gameSessionId' is defined but never used.  @typescript-eslint/no-unused-vars
+192:6  Warning: React Hook useEffect has missing dependencies: 'gameQuestions' and 'mockParticipants'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+203:6  Warning: React Hook useEffect has a missing dependency: 'handleTimeUp'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./components/host/HostMotivationInsights.tsx
+130:34  Warning: 'reviews' is defined but never used.  @typescript-eslint/no-unused-vars
+180:42  Warning: 'impact' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/host/MilestoneCountdown.tsx
+85:9  Warning: 'getCategoryIcon' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/layout-designer/RoomLayoutDesigner.tsx
+93:3  Warning: 'onExport' is defined but never used.  @typescript-eslint/no-unused-vars
+120:10  Warning: 'selectedWall' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+120:24  Warning: 'setSelectedWall' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+121:10  Warning: 'selectedRoom' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+121:24  Warning: 'setSelectedRoom' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+122:10  Warning: 'selectedElement' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+122:27  Warning: 'setSelectedElement' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/media/AlbumManager.tsx
+44:25  Warning: 'eventId' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/media/AlbumQRCode.tsx
+29:34  Warning: 'url' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/media/LivePhotoFeed.tsx
+34:26  Warning: 'eventId' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/media/MediaUpload.tsx
+33:24  Warning: 'eventId' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/media/PhotoBooth.tsx
+38:23  Warning: 'eventId' is defined but never used.  @typescript-eslint/no-unused-vars
+137:14  Warning: 'error' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/media/PhotoGallery.tsx
+34:25  Warning: 'eventId' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/media/QRCodeGenerator.tsx
+41:28  Warning: 'eventId' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/rsvp/CustomFieldsManager.tsx
+30:10  Warning: 'editingField' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+74:9  Warning: 'addOption' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+83:9  Warning: 'removeOption' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/rsvp/FormCanvas.tsx
+30:3  Warning: 'settings' is defined but never used.  @typescript-eslint/no-unused-vars
+86:31  Warning: 'e' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/rsvp/FormFieldLibrary.tsx
+29:3  Warning: 'onAddField' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/rsvp/FormPreview.tsx
+17:3  Warning: 'formFields' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/rsvp/RSVPFormBuilder.tsx
+56:3  Warning: 'onUpdateSettings' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/showcase/ConferenceGuestSchedule.tsx
+60:3  Warning: 'event' is defined but never used.  @typescript-eslint/no-unused-vars
+61:3  Warning: 'guest' is defined but never used.  @typescript-eslint/no-unused-vars
+399:6  Warning: React Hook useMemo has a missing dependency: 'mockSessions'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./components/survey/OptionInputs.tsx
+90:9  Warning: 'createTimeFromString' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/survey/SurveyCreator.tsx
+26:26  Warning: 'eventId' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/survey/SurveyCreatorDialog.tsx
+49:3  Warning: 'eventId' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/survey/SurveyDetailView.tsx
+22:3  Warning: 'onSurveyUpdated' is defined but never used.  @typescript-eslint/no-unused-vars
+25:10  Warning: 'showEditDialog' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/survey/SurveyEditDialog.tsx
+74:9  Warning: 'resetForm' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+164:9  Warning: 'addOption' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+173:9  Warning: 'updateOption' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+186:9  Warning: 'removeOption' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/survey/SurveyList.tsx
+44:10  Warning: 'editingSurvey' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/survey/SurveyQRCode.tsx
+28:25  Warning: 'eventId' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/survey/SurveyResponses.tsx
+22:28  Warning: 'eventId' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/ui/calendar.tsx
+58:27  Warning: '_props' is defined but never used.  @typescript-eslint/no-unused-vars
+59:28  Warning: '_props' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/ui/chart.tsx
+75:7  Warning: '_' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/vendor/ActiveProjectsDashboard.tsx
+86:36  Warning: 'vendor' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/vendor/ClientDashboard.tsx
+64:36  Warning: 'vendor' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/vendor/EnhancedVendorDashboard.tsx
+43:10  Warning: 'activeAIFeature' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+43:27  Warning: 'setActiveAIFeature' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/vendor/EnhancedVenueManagement.tsx
+72:3  Warning: 'vendor' is defined but never used.  @typescript-eslint/no-unused-vars
+117:10  Warning: 'showAddFloor' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/vendor/InvoiceAutomationPanel.tsx
+24:35  Warning: 'vendor' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/vendor/ServiceDeliveryManager.tsx
+65:35  Warning: 'vendor' is defined but never used.  @typescript-eslint/no-unused-vars
+67:10  Warning: 'editingTemplate' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+67:27  Warning: 'setEditingTemplate' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/vendor/VendorAnalytics.tsx
+43:28  Warning: 'vendor' is defined but never used.  @typescript-eslint/no-unused-vars
+202:39  Warning: 'index' is defined but never used.  @typescript-eslint/no-unused-vars
+235:43  Warning: 'index' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/vendor/VendorBilling.tsx
+73:26  Warning: 'vendor' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/vendor/VendorBillingHub.tsx
+77:29  Warning: 'vendor' is defined but never used.  @typescript-eslint/no-unused-vars
+80:10  Warning: 'dateFilter' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+80:22  Warning: 'setDateFilter' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/vendor/VendorClients.tsx
+80:26  Warning: 'vendor' is defined but never used.  @typescript-eslint/no-unused-vars
+83:10  Warning: 'selectedClient' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+83:26  Warning: 'setSelectedClient' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/vendor/VendorCommunications.tsx
+40:33  Warning: 'vendor' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/vendor/VendorContracts.tsx
+63:28  Warning: 'vendor' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/vendor/VendorDocuments.tsx
+72:28  Warning: 'vendor' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/vendor/VendorLeads.tsx
+65:24  Warning: 'vendor' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/vendor/VenueManagementModule.tsx
+62:3  Warning: 'vendor' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/vendor/VenuePresetManager.tsx
+63:3  Warning: 'venueFloors' is defined but never used.  @typescript-eslint/no-unused-vars
+64:3  Warning: 'onBack' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/vendor/calendar/VendorCalendar.tsx
+22:27  Warning: 'vendor' is defined but never used.  @typescript-eslint/no-unused-vars
+25:11  Warning: 'toast' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/vendor/leads/ClientCommunicationHub.tsx
+26:3  Warning: 'leadId' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/vendor/leads/EnhancedLeadDetails.tsx
+63:3  Warning: 'onStatusUpdate' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/vendor/leads/NegotiationTracker.tsx
+22:31  Warning: 'leadId' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/vendor/leads/ProjectTimeline.tsx
+24:28  Warning: 'leadId' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/venue/VenueDrawingCanvas.tsx
+34:3  Warning: 'venueId' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/website-builder/CanvasPreview.tsx
+36:3  Warning: 'website' is defined but never used.  @typescript-eslint/no-unused-vars
+52:51  Warning: 'showGuides' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+424:19  Warning: 'e' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/website-builder/FloatingSection.tsx
+35:10  Warning: 'dragOffset' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+36:10  Warning: 'originalPosition' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+61:5  Warning: React Hook useMemo has a missing dependency: 'section.positioning?.coordinates'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./components/website-builder/FloatingWindow.tsx
+44:10  Warning: 'dragOffset' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/website-builder/SectionDragHandler.tsx
+20:55  Warning: 'e' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/website-builder/StickyHeader.tsx
+29:3  Warning: 'isEditMode' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/website-builder/WebsiteEditor.tsx
+96:5  Warning: 'resetDragState' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+104:57  Warning: 'template' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./components/website-builder/sections/SocialFeedSection.tsx
+100:3  Warning: 'hashtag' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/website-builder/sections/TicketingSection.tsx
+272:27  Warning: '_' is defined but never used.  @typescript-eslint/no-unused-vars
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
+Failed to compile.
+
+./components/event-creation/EventPhotoUpload.tsx:102:67
+Type error: Property 'id' does not exist on type '{ id?: string | undefined; url?: string | undefined; file?: File | undefined; title?: string | undefined; description?: string | undefined; isUploaded?: boolean | undefined; }[]'.
+
+[0m [90m 100 |[39m
+ [90m 101 |[39m   [36mconst[39m removeExistingPhoto [33m=[39m (id[33m:[39m string) [33m=>[39m {
+[31m[1m>[22m[39m[90m 102 |[39m     [36mconst[39m updatedPhotos [33m=[39m existingPhotos[33m.[39mfilter((photo) [33m=>[39m photo[33m?[39m[33m.[39mid [33m!==[39m id)[33m;[39m
+ [90m     |[39m                                                                   [31m[1m^[22m[39m
+ [90m 103 |[39m     onPhotosUpdate(updatedPhotos)[33m;[39m
+ [90m 104 |[39m   }[33m;[39m
+ [90m 105 |[39m[0m
+Next.js build worker exited with code: 1 and signal: null

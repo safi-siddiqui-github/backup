@@ -1,0 +1,27 @@
+Commits on Sep 14, 2025
+Fix: Resolve prop type mismatch
+lovable-dev[bot]
+lovable-dev[bot]
+committed
+yesterday
+·
+Refactor guest experience UI
+lovable-dev[bot]
+lovable-dev[bot]
+committed
+yesterday
+·
+Refactor guest experience
+lovable-dev[bot]
+lovable-dev[bot]
+committed
+yesterday
+·
+feat: Implement Quick Create enhancements
+lovable-dev[bot]
+lovable-dev[bot]
+committed
+yesterday
+·
+Commits on Sep 11, 2025
+feat: Convert event creation to page

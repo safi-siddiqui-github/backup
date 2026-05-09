@@ -1,0 +1,537 @@
+"use client";
+
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
+import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/hooks/use-toast";
+import {
+  Calendar,
+  CheckSquare,
+  Hash,
+  List,
+  Plus,
+  Save,
+  Star,
+  Trash,
+  Type,
+} from "lucide-react";
+import { useState } from "react";
+import DateInput from "./DateInput";
+import OptionInputs from "./OptionInputs";
+import RatingInput from "./RatingInput";
+import { SurveyQuestion } from "./types";
+
+interface SurveyCreatorDialogProps {
+  eventId: string;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  onSurveyCreated: () => void;
+}
+
+const SurveyCreatorDialog = ({
+  eventId,
+  open,
+  onOpenChange,
+  onSurveyCreated,
+}: SurveyCreatorDialogProps) => {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [questions, setQuestions] = useState<SurveyQuestion[]>([]);
+  const [allowAnonymous, setAllowAnonymous] = useState(true);
+  const [showResults, setShowResults] = useState(false);
+  const [multipleSubmissions, setMultipleSubmissions] = useState(false);
+  const { toast } = useToast();
+
+  const resetForm = () => {
+    setTitle("");
+    setDescription("");
+    setQuestions([]);
+    setAllowAnonymous(true);
+    setShowResults(false);
+    setMultipleSubmissions(false);
+  };
+
+  const questionTypes = [
+    {
+      value: "multiple-choice",
+      label: "Multiple Choice",
+      icon: List,
+      description: "Select one option from a list",
+      category: "Choice",
+    },
+    {
+      value: "checkbox",
+      label: "Checkboxes",
+      icon: CheckSquare,
+      description: "Select multiple options",
+      category: "Choice",
+    },
+    {
+      value: "text",
+      label: "Short Text",
+      icon: Type,
+      description: "Brief text response",
+      category: "Text",
+    },
+    {
+      value: "rating",
+      label: "Rating Scale",
+      icon: Star,
+      description: "Rate on a scale (1-5, 1-10, etc.)",
+      category: "Rating",
+    },
+    {
+      value: "date",
+      label: "Date",
+      icon: Calendar,
+      description: "Select a date",
+      category: "Date & Time",
+    },
+    {
+      value: "number",
+      label: "Number",
+      icon: Hash,
+      description: "Numeric input",
+      category: "Data",
+    },
+  ];
+
+  const addQuestion = (type: SurveyQuestion["type"]) => {
+    const newQuestion: SurveyQuestion = {
+      id: Date.now().toString(),
+      type,
+      question: "",
+      isRequired: false,
+      order: questions.length + 1,
+      options:
+        type === "multiple-choice" || type === "checkbox"
+          ? ["Option 1", "Option 2"]
+          : undefined,
+      optionType:
+        type === "multiple-choice" || type === "checkbox" ? "text" : undefined,
+      optionValues:
+        type === "multiple-choice" || type === "checkbox"
+          ? [
+              { label: "Option 1", value: "Option 1" },
+              { label: "Option 2", value: "Option 2" },
+            ]
+          : undefined,
+      ratingScale:
+        type === "rating"
+          ? {
+              min: 1,
+              max: 5,
+              labels: ["Poor", "Fair", "Good", "Very Good", "Excellent"],
+            }
+          : undefined,
+    };
+    setQuestions([...questions, newQuestion]);
+  };
+
+  const updateQuestion = (id: string, updates: Partial<SurveyQuestion>) => {
+    setQuestions(
+      questions.map((q) => (q.id === id ? { ...q, ...updates } : q)),
+    );
+  };
+
+  const deleteQuestion = (id: string) => {
+    setQuestions(questions.filter((q) => q.id !== id));
+  };
+
+  const updateRatingScale = (
+    questionId: string,
+    field: "min" | "max",
+    value: number,
+  ) => {
+    const question = questions.find((q) => q.id === questionId);
+    if (question && question.ratingScale) {
+      updateQuestion(questionId, {
+        ratingScale: { ...question.ratingScale, [field]: value },
+      });
+    }
+  };
+
+  const saveSurvey = () => {
+    if (!title.trim()) {
+      toast({
+        title: "Title required",
+        description: "Please enter a title for your survey.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (questions.length === 0) {
+      toast({
+        title: "Questions required",
+        description: "Please add at least one question to your survey.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Here you would save to your backend
+    toast({
+      title: "Survey created",
+      description: `${title} has been created successfully.`,
+    });
+
+    resetForm();
+    onSurveyCreated();
+    onOpenChange(false);
+  };
+
+  const getQuestionTypeInfo = (type: SurveyQuestion["type"]) => {
+    return questionTypes.find((qt) => qt.value === type) || questionTypes[0];
+  };
+
+  return (
+    <Dialog
+      open={open}
+      onOpenChange={onOpenChange}
+    >
+      <DialogContent className="max-h-[90vh] max-w-4xl overflow-y-auto">
+        <DialogHeader>
+          <DialogTitle>Create New Survey</DialogTitle>
+        </DialogHeader>
+
+        <div className="space-y-6">
+          {/* Survey Details */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg">Survey Details</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="survey-title">Title</Label>
+                <Input
+                  id="survey-title"
+                  placeholder="e.g., Event Feedback Survey"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="survey-description">Description</Label>
+                <Textarea
+                  id="survey-description"
+                  placeholder="Tell your guests what this survey is about..."
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  rows={3}
+                />
+              </div>
+
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+                <div className="flex items-center justify-between rounded border p-3">
+                  <div>
+                    <Label>Allow Anonymous</Label>
+                    <p className="text-muted-foreground text-xs">
+                      Don&apos;t require login
+                    </p>
+                  </div>
+                  <Switch
+                    checked={allowAnonymous}
+                    onCheckedChange={setAllowAnonymous}
+                  />
+                </div>
+
+                <div className="flex items-center justify-between rounded border p-3">
+                  <div>
+                    <Label>Show Results</Label>
+                    <p className="text-muted-foreground text-xs">
+                      Let guests see results
+                    </p>
+                  </div>
+                  <Switch
+                    checked={showResults}
+                    onCheckedChange={setShowResults}
+                  />
+                </div>
+
+                <div className="flex items-center justify-between rounded border p-3">
+                  <div>
+                    <Label>Multiple Submissions</Label>
+                    <p className="text-muted-foreground text-xs">
+                      Allow repeat responses
+                    </p>
+                  </div>
+                  <Switch
+                    checked={multipleSubmissions}
+                    onCheckedChange={setMultipleSubmissions}
+                  />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Question Builder */}
+          <Card>
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-lg">
+                  Questions ({questions.length})
+                </CardTitle>
+                <Select
+                  onValueChange={(value) =>
+                    addQuestion(value as SurveyQuestion["type"])
+                  }
+                >
+                  <SelectTrigger className="w-60">
+                    <Plus className="mr-2 h-4 w-4" />
+                    <SelectValue placeholder="Add Question Type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {questionTypes.map((type) => {
+                      const Icon = type.icon;
+                      return (
+                        <SelectItem
+                          key={type.value}
+                          value={type.value}
+                        >
+                          <div className="flex items-center gap-3">
+                            <Icon className="h-4 w-4" />
+                            <div>
+                              <div className="font-medium">{type.label}</div>
+                              <div className="text-muted-foreground text-xs">
+                                {type.description}
+                              </div>
+                            </div>
+                          </div>
+                        </SelectItem>
+                      );
+                    })}
+                  </SelectContent>
+                </Select>
+              </div>
+            </CardHeader>
+            <CardContent>
+              {questions.length === 0 ? (
+                <div className="text-muted-foreground py-8 text-center">
+                  <p>No questions yet. Add your first question above!</p>
+                </div>
+              ) : (
+                <div className="max-h-96 space-y-4 overflow-y-auto">
+                  {questions.map((question, index) => {
+                    const typeInfo = getQuestionTypeInfo(question.type);
+                    const Icon = typeInfo.icon;
+
+                    return (
+                      <Card
+                        key={question.id}
+                        className="border-l-primary border-l-4"
+                      >
+                        <CardContent className="p-4">
+                          <div className="space-y-4">
+                            <div className="flex items-center justify-between">
+                              <Badge
+                                variant="outline"
+                                className="flex items-center gap-1"
+                              >
+                                <Icon className="h-3 w-3" />
+                                {typeInfo.label}
+                              </Badge>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => deleteQuestion(question.id)}
+                                className="text-destructive hover:text-destructive"
+                              >
+                                <Trash className="h-4 w-4" />
+                              </Button>
+                            </div>
+
+                            <Input
+                              placeholder={`Question ${index + 1}`}
+                              value={question.question}
+                              onChange={(e) =>
+                                updateQuestion(question.id, {
+                                  question: e.target.value,
+                                })
+                              }
+                            />
+
+                            {/* Multiple Choice & Checkbox Options */}
+                            {(question.type === "multiple-choice" ||
+                              question.type === "checkbox") && (
+                              <OptionInputs
+                                optionType={question.optionType || "text"}
+                                options={question.optionValues || []}
+                                onOptionsChange={(options) =>
+                                  updateQuestion(question.id, {
+                                    optionValues: options,
+                                    options: options.map(
+                                      (opt) =>
+                                        opt.label || opt.value.toString(),
+                                    ),
+                                  })
+                                }
+                                onOptionTypeChange={(optionType) =>
+                                  updateQuestion(question.id, {
+                                    optionType,
+                                    optionValues:
+                                      optionType === "text"
+                                        ? [
+                                            {
+                                              label: "Option 1",
+                                              value: "Option 1",
+                                            },
+                                            {
+                                              label: "Option 2",
+                                              value: "Option 2",
+                                            },
+                                          ]
+                                        : [
+                                            {
+                                              label: "Option 1",
+                                              value: new Date(),
+                                            },
+                                            {
+                                              label: "Option 2",
+                                              value: new Date(),
+                                            },
+                                          ],
+                                  })
+                                }
+                              />
+                            )}
+
+                            {/* Rating Scale Configuration */}
+                            {question.type === "rating" && (
+                              <div className="space-y-3">
+                                <Label className="text-sm">
+                                  Rating Scale Configuration
+                                </Label>
+                                <div className="flex items-center gap-4">
+                                  <div className="flex items-center gap-2">
+                                    <Label className="text-xs">Min:</Label>
+                                    <Select
+                                      value={question.ratingScale?.min.toString()}
+                                      onValueChange={(value) =>
+                                        updateRatingScale(
+                                          question.id,
+                                          "min",
+                                          parseInt(value),
+                                        )
+                                      }
+                                    >
+                                      <SelectTrigger className="w-16">
+                                        <SelectValue />
+                                      </SelectTrigger>
+                                      <SelectContent>
+                                        <SelectItem value="1">1</SelectItem>
+                                        <SelectItem value="0">0</SelectItem>
+                                      </SelectContent>
+                                    </Select>
+                                  </div>
+                                  <div className="flex items-center gap-2">
+                                    <Label className="text-xs">Max:</Label>
+                                    <Select
+                                      value={question.ratingScale?.max.toString()}
+                                      onValueChange={(value) =>
+                                        updateRatingScale(
+                                          question.id,
+                                          "max",
+                                          parseInt(value),
+                                        )
+                                      }
+                                    >
+                                      <SelectTrigger className="w-16">
+                                        <SelectValue />
+                                      </SelectTrigger>
+                                      <SelectContent>
+                                        <SelectItem value="5">5</SelectItem>
+                                        <SelectItem value="10">10</SelectItem>
+                                      </SelectContent>
+                                    </Select>
+                                  </div>
+                                </div>
+                                <div className="bg-muted/50 rounded border p-3">
+                                  <Label className="text-muted-foreground mb-2 block text-xs">
+                                    Preview:
+                                  </Label>
+                                  <RatingInput
+                                    min={question.ratingScale?.min || 1}
+                                    max={question.ratingScale?.max || 5}
+                                    labels={question.ratingScale?.labels}
+                                    disabled={true}
+                                    value={3}
+                                  />
+                                </div>
+                              </div>
+                            )}
+
+                            {/* Date Question Preview */}
+                            {question.type === "date" && (
+                              <div className="space-y-2">
+                                <Label className="text-sm">
+                                  Date Input Preview
+                                </Label>
+                                <div className="bg-muted/50 rounded border p-3">
+                                  <DateInput
+                                    disabled={true}
+                                    placeholder="Date will appear here"
+                                  />
+                                </div>
+                              </div>
+                            )}
+
+                            <div className="flex items-center gap-2">
+                              <Switch
+                                checked={question.isRequired}
+                                onCheckedChange={(checked) =>
+                                  updateQuestion(question.id, {
+                                    isRequired: checked,
+                                  })
+                                }
+                              />
+                              <Label className="text-sm">Required</Label>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
+                </div>
+              )}
+            </CardContent>
+          </Card>
+
+          {/* Actions */}
+          <div className="flex justify-end gap-2">
+            <Button
+              variant="outline"
+              onClick={() => onOpenChange(false)}
+            >
+              Cancel
+            </Button>
+            <Button onClick={saveSurvey}>
+              <Save className="mr-2 h-4 w-4" />
+              Create Survey
+            </Button>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+};
+
+export default SurveyCreatorDialog;

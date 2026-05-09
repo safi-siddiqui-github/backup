@@ -1,0 +1,341 @@
+@import 'tailwindcss';
+@import '../../vendor/livewire/flux/dist/flux.css';
+
+@source '../views';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../vendor/livewire/flux-pro/stubs/**/*.blade.php';
+@source '../../vendor/livewire/flux/stubs/**/*.blade.php';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+    button,
+    a {
+        @apply cursor-pointer;
+    }
+}
+
+@theme {
+    --breakpoint-xs: 25rem; /* 400 px*/
+    /* --breakpoint-xs: 30rem; */
+    /* --breakpoint-2xl: 100rem;
+  --breakpoint-3xl: 120rem; */
+}
+
+@layer components {
+    .text-primary {
+        @apply text-purple-600;
+    }
+    .text-secondary {
+        @apply text-gray-600;
+    }
+    .text-error {
+        @apply text-red-500;
+    }
+    .text-leading {
+        @apply w-5/6 tracking-tight text-gray-600;
+    }
+
+    .text-medium {
+        @apply text-lg font-medium tracking-tight md:text-xl md:font-semibold lg:text-2xl;
+    }
+    .text-large {
+        @apply text-3xl font-semibold tracking-tight md:font-bold lg:text-4xl;
+    }
+    .text-extra-large {
+        @apply text-3xl font-semibold tracking-tight md:font-bold lg:text-5xl;
+    }
+
+    .flex-primary {
+        @apply flex flex-col gap-4 p-4 md:gap-6 md:p-6;
+    }
+    .flex-secondary {
+        @apply flex flex-col gap-4 md:gap-6;
+    }
+    .flex-tertiary {
+        @apply flex flex-col items-center gap-4 py-20 text-center text-white sm:py-40 lg:py-56 xl:py-72;
+    }
+    .flex-section {
+        @apply flex flex-col gap-10 p-4 md:gap-16 md:p-6;
+    }
+
+    .border-primary {
+        @apply border border-purple-600;
+    }
+    .border-secondary {
+        @apply border border-gray-200;
+    }
+
+    .box-auth {
+        @apply flex w-full flex-col gap-4 bg-white p-4 sm:p-8 md:max-w-lg md:gap-8 md:rounded-2xl md:p-10 md:shadow-xl;
+    }
+    .box-shadow {
+        @apply flex flex-col gap-4 overflow-hidden rounded-2xl border border-gray-200 bg-white p-6 shadow-xl md:gap-6;
+    }
+    .box-shadow-two {
+        @apply flex flex-col gap-4 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-xl md:gap-6;
+    }
+
+    .box-shadow-outline {
+        @apply rounded-2xl outline outline-purple-600;
+    }
+
+    .label {
+        @apply cursor-pointer font-medium tracking-tight text-gray-600;
+    }
+    .input {
+        @apply truncate rounded-lg border border-purple-500 p-2 outline-purple-600;
+    }
+    .checkbox {
+        @apply size-5 accent-purple-500;
+    }
+    .box-input-primary {
+        @apply flex flex-col gap-1;
+    }
+    .box-input-secondary {
+        @apply flex flex-wrap items-center gap-2;
+    }
+
+    .button-filled-primary {
+        @apply flex min-w-fit flex-1 cursor-pointer items-center justify-center gap-2 rounded-lg bg-purple-600 px-4 py-2 font-medium text-white;
+    }
+    .button-outlined-primary {
+        @apply flex min-w-fit flex-1 cursor-pointer items-center justify-center gap-2 rounded-lg border border-purple-600 bg-white px-4 py-2 font-medium text-purple-600;
+    }
+    .button-filled-secondary {
+        @apply flex min-w-fit flex-1 cursor-pointer items-center justify-center gap-2 rounded-lg bg-gray-300 px-4 py-2 font-medium;
+    }
+    .button-outlined-secondary {
+        @apply flex min-w-fit flex-1 cursor-pointer items-center justify-center gap-2 rounded-lg border border-gray-600 bg-white px-4 py-2 font-medium text-gray-600;
+    }
+
+    .bg-primary {
+        @apply bg-purple-600;
+    }
+
+    .ball-red {
+        @apply h-4 w-4 rounded-full bg-red-500;
+    }
+    
+    /*     
+    .heading-one {
+        @apply text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl;
+    }
+    .heading-two {
+        @apply text-2xl font-bold tracking-tight md:text-3xl lg:text-4xl;
+    }
+    .heading-three {
+        @apply text-xl font-bold tracking-tight;
+    }
+    .heading-four {
+        @apply text-lg font-semibold tracking-tight;
+    }
+
+    .border-light {
+        @apply border border-gray-200;
+    }
+
+    .input-one {
+        @apply rounded-full bg-purple-100 px-4 py-2 focus:outline-purple-500;
+    }
+
+    .text-subtle {
+        @apply text-gray-400;
+    }
+    .text-error {
+        @apply text-red-500;
+    }
+
+    .purple-button {
+        @apply flex flex-1 min-w-fit items-center justify-center gap-2 rounded-full bg-purple-700 px-4 py-2 font-medium text-white;
+    }
+    .white-button {
+        @apply flex flex-1 min-w-fit items-center justify-center gap-2 rounded-full border border-purple-500 bg-white px-4 py-2 font-medium text-purple-600;
+    }
+
+    .border-primary {
+        @apply border border-purple-600;
+    }
+
+    .border-box {
+        @apply flex flex-col gap-2 overflow-hidden rounded-xl border border-gray-200 p-4 shadow-lg ;
+    }
+    .border-box-two {
+        @apply flex flex-col overflow-hidden rounded-lg border border-gray-200 shadow-lg;
+    }
+    .auth-box {
+        @apply flex w-full max-w-lg flex-col gap-8 rounded-2xl bg-white px-4 py-10 md:border md:border-gray-200 md:px-10 md:shadow-lg;
+    }
+    .purple-box {
+        @apply flex flex-col gap-4 rounded-lg bg-purple-700 p-4 text-white shadow-lg;
+    }
+    .gray-box {
+        @apply flex items-center justify-center gap-2 rounded-lg bg-gray-200 p-2 text-gray-800;
+    }
+
+    .leading-one {
+        @apply tracking-tight text-gray-400;
+    }
+
+    .primary-button {
+        @apply flex w-fit min-w-fit cursor-pointer items-center gap-2 rounded-md bg-blue-500 px-4 py-2 tracking-tight text-white;
+    }
+    .secondary-button {
+        @apply flex w-fit cursor-pointer items-center gap-2 rounded-md px-4 py-2 tracking-tight text-gray-500 hover:bg-gray-50;
+    }
+    .gray-button {
+        @apply flex w-fit cursor-pointer items-center gap-2 rounded-md bg-gray-500 px-4 py-2 tracking-tight text-white;
+    }
+    .tertiary-button {
+        @apply flex w-fit cursor-pointer items-center gap-2 rounded-md bg-indigo-500 px-4 py-2 tracking-tight text-white;
+    }
+    .border-button {
+        @apply flex items-center justify-center gap-2 rounded-lg border border-gray-200 p-2 text-gray-500;
+    }
+
+    .gray-border {
+        @apply rounded-lg border border-gray-200 p-2 text-gray-500;
+    }
+
+    .pill-red {
+        @apply w-fit rounded-full bg-red-100 px-2 py-1 text-xs text-red-600;
+    }
+    .pill-blue {
+        @apply w-fit rounded-full bg-blue-100 px-2 py-1 text-xs text-blue-600;
+    }
+    .pill-gray {
+        @apply w-fit rounded-full bg-gray-100 px-2 py-1 text-xs text-gray-600;
+    }
+    .pill-amber {
+        @apply w-fit rounded-full bg-amber-100 px-2 py-1 text-xs text-amber-600;
+    }
+    .pill-orange {
+        @apply w-fit rounded-full bg-orange-100 px-2 py-1 text-xs text-orange-600;
+    }
+    .pill-green {
+        @apply w-fit rounded-full bg-green-100 px-2 py-1 text-xs text-green-600;
+    }
+    .pill-purple {
+        @apply w-fit rounded-full bg-purple-100 px-2 py-1 text-xs text-purple-600;
+    }
+
+     */
+}
+
+.range-slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 2px;
+    background: #ddd;
+    border-radius: 3px;
+    outline: none;
+}
+
+.range-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 20px;
+    width: 20px;
+    background-color: #9810fa; /* Tailwind primary: indigo-500 */
+    border-radius: 9999px;
+    cursor: pointer;
+    border: none;
+    /* margin-top: -7px; center the thumb */
+}
+
+.range-slider::-moz-range-thumb {
+    height: 20px;
+    width: 20px;
+    background-color: #9810fa;
+    border-radius: 9999px;
+    cursor: pointer;
+    border: none;
+}
+
+/* @theme {
+  --color-blue-one: #3B82F6;
+  --color-secondary: #9CA3AF;
+  --color-borderColor: #E2E8F0;
+  --color-bermuda: #78dcca;
+} */
+
+/* @theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+    --color-zinc-50: #fafafa;
+    --color-zinc-100: #f5f5f5;
+    --color-zinc-200: #e5e5e5;
+    --color-zinc-300: #d4d4d4;
+    --color-zinc-400: #a3a3a3;
+    --color-zinc-500: #737373;
+    --color-zinc-600: #525252;
+    --color-zinc-700: #404040;
+    --color-zinc-800: #262626;
+    --color-zinc-900: #171717;
+    --color-zinc-950: #0a0a0a;
+
+    --color-accent: var(--color-neutral-800);
+    --color-accent-content: var(--color-neutral-800);
+    --color-accent-foreground: var(--color-white);
+}
+
+@layer theme {
+    .dark {
+        --color-accent: var(--color-white);
+        --color-accent-content: var(--color-white);
+        --color-accent-foreground: var(--color-neutral-800);
+    }
+}
+
+@layer base {
+
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
+}
+
+[data-flux-field]:not(ui-radio, ui-checkbox) {
+    @apply grid gap-2;
+}
+
+[data-flux-label] {
+    @apply  !mb-0 !leading-tight;
+}
+
+input:focus[data-flux-control],
+textarea:focus[data-flux-control],
+select:focus[data-flux-control] {
+    @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-accent-foreground;
+} */
+
+/* \[:where(&)\]:size-4 {
+    @apply size-4;
+} */
+
+/* 
+[text, backgrounds, buttons]
+blue: text-blue-500, bg-blue-400, hover:bg-gray-50
+
+[Headings]
+neutral: text-neutral-800 
+
+[Labels]
+gray: text-gray-400
+
+[input]
+gray: text-gray-500, text-gray-800
+
+[borders, background]
+border-gray-200, bg-indigo-500
+
+[hr]
+border-gray-400, border-gray-200
+
+[circles]
+bg-orange-500
+
+*/

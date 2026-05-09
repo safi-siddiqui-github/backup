@@ -1,0 +1,50 @@
+   ▲ Next.js 15.5.3 (Turbopack)
+
+   Creating an optimized production build ...
+ ✓ Finished writing to disk in 55ms
+ ✓ Compiled successfully in 5.4s
+   Linting and checking validity of types ...
+
+./app/(general)/eventpage/page.tsx
+34:10  Warning: 'filterPanelCategory' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/general/eventpage/DetailEvent.tsx
+55:9  Warning: 'handleBack' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/general/eventpage/FilterPanel.tsx
+64:9  Warning: 'handleDateClick' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/general/eventpage/TicketSelectionModal.tsx
+114:3  Warning: 'eventTitle' is defined but never used.  @typescript-eslint/no-unused-vars
+146:17  Warning: '_' is defined but never used.  @typescript-eslint/no-unused-vars
+180:17  Warning: '_' is defined but never used.  @typescript-eslint/no-unused-vars
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
+   Collecting page data ...
+   Generating static pages (0/9) ...
+   Generating static pages (2/9) 
+   Generating static pages (4/9) 
+   Generating static pages (6/9) 
+ ✓ Generating static pages (9/9)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                         Size  First Load JS
+┌ ○ /                            2.02 kB         156 kB
+├ ○ /_not-found                      0 B         114 kB
+├ ○ /eventpage                    6.3 kB         167 kB
+├ ƒ /eventpage/[id]              11.8 kB         172 kB
+├ ○ /landing                     11.9 kB         166 kB
+├ ○ /ticketcheckout              7.98 kB         168 kB
+└ ○ /ticketcheckoutpayment       9.09 kB         170 kB
++ First Load JS shared by all     137 kB
+  ├ chunks/5564f493499345f1.js   24.1 kB
+  ├ chunks/7880f8283a6f3daf.js   59.2 kB
+  ├ chunks/8082ab48faca5ea1.js   17.2 kB
+  ├ chunks/9635b61e11e38b90.css  23.2 kB
+  └ other shared chunks (total)  13.6 kB
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

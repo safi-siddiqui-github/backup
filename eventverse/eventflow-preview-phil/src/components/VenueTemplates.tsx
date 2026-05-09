@@ -1,0 +1,160 @@
+import { Button } from "@/components/ui/button";
+import type { Table } from "@/types/venue";
+import { Badge } from "@/components/ui/badge";
+import { Users, Grid3X3, Plus } from "lucide-react";
+
+import type { VenueObject } from "./VenueObject";
+import type { Seat, SeatSection } from '@/types/venue';
+
+export interface VenueTemplate {
+  id: string;
+  name: string;
+  description: string;
+  capacity: number;
+  venueType: "table-based" | "seat-based";
+  tables: Omit<Table, 'id'>[];
+  seats?: Omit<Seat, 'id'>[];
+  seatSections?: SeatSection[];
+  venueObjects: Omit<VenueObject, 'id'>[];
+  imagePreview?: string;
+}
+
+export const venueTemplates: VenueTemplate[] = [
+  {
+    id: "hall",
+    name: "Banquet Hall",
+    description: "Traditional banquet setup with round tables and head table",
+    capacity: 120,
+    venueType: "table-based",
+    tables: [
+      { name: "Head Table", seats: 12, shape: "long-rectangular", x: 300, y: 80, guests: [], targetGroup: "VIP", scale: 1.2, rotation: 0, seatAssignments: {} },
+      { name: "Table 1", seats: 8, shape: "round", x: 150, y: 200, guests: [], targetGroup: "Family", scale: 1, rotation: 0, seatAssignments: {} },
+      { name: "Table 2", seats: 8, shape: "round", x: 350, y: 200, guests: [], targetGroup: "Family", scale: 1, rotation: 0, seatAssignments: {} },
+      { name: "Table 3", seats: 8, shape: "round", x: 550, y: 200, guests: [], targetGroup: "Friends", scale: 1, rotation: 0, seatAssignments: {} },
+      { name: "Table 4", seats: 8, shape: "round", x: 150, y: 320, guests: [], targetGroup: "Colleagues", scale: 1, rotation: 0, seatAssignments: {} },
+      { name: "Table 5", seats: 8, shape: "round", x: 350, y: 320, guests: [], targetGroup: "Colleagues", scale: 1, rotation: 0, seatAssignments: {} },
+      { name: "Table 6", seats: 8, shape: "round", x: 550, y: 320, guests: [], targetGroup: "Friends", scale: 1, rotation: 0, seatAssignments: {} }
+    ],
+    venueObjects: [
+      { name: "Main Stage", type: "stage", x: 250, y: 20, width: 200, height: 80, rotation: 0, color: "#8B5CF6" },
+      { name: "Exit 1", type: "exit", x: 50, y: 250, width: 60, height: 100, rotation: 0, color: "#EF4444" },
+      { name: "Exit 2", type: "exit", x: 650, y: 250, width: 60, height: 100, rotation: 0, color: "#EF4444" }
+    ]
+  },
+  {
+    id: "stadium",
+    name: "Stadium",
+    description: "Large venue with tiered seating sections around central field",
+    capacity: 300,
+    venueType: "seat-based",
+    tables: [],
+    seatSections: [
+      { id: "section-a", name: "Section A", rows: 15, seatsPerRow: 20, startX: 100, startY: 150, priceTier: "General", color: "#3B82F6" },
+      { id: "section-b", name: "Section B", rows: 15, seatsPerRow: 20, startX: 500, startY: 150, priceTier: "General", color: "#3B82F6" },
+      { id: "section-c", name: "Section C", rows: 10, seatsPerRow: 15, startX: 100, startY: 350, priceTier: "General", color: "#3B82F6" },
+      { id: "section-d", name: "Section D", rows: 10, seatsPerRow: 15, startX: 500, startY: 350, priceTier: "General", color: "#3B82F6" },
+      { id: "vip-box-1", name: "VIP Box 1", rows: 2, seatsPerRow: 8, startX: 200, startY: 100, priceTier: "VIP", color: "#8B5CF6" },
+      { id: "vip-box-2", name: "VIP Box 2", rows: 2, seatsPerRow: 8, startX: 400, startY: 100, priceTier: "VIP", color: "#8B5CF6" }
+    ],
+    seats: [],
+    venueObjects: [
+      { name: "Playing Field", type: "stage", x: 250, y: 250, width: 200, height: 150, rotation: 0, color: "#10B981" },
+      { name: "North Exit", type: "exit", x: 350, y: 50, width: 100, height: 60, rotation: 0, color: "#EF4444" },
+      { name: "South Exit", type: "exit", x: 350, y: 450, width: 100, height: 60, rotation: 0, color: "#EF4444" },
+      { name: "East Exit", type: "exit", x: 600, y: 300, width: 60, height: 100, rotation: 0, color: "#EF4444" },
+      { name: "West Exit", type: "exit", x: 50, y: 300, width: 60, height: 100, rotation: 0, color: "#EF4444" }
+    ]
+  },
+  {
+    id: "outdoor",
+    name: "Outdoor Event",
+    description: "Open-air venue with scattered seating and natural layout",
+    capacity: 80,
+    venueType: "table-based",
+    tables: [
+      { name: "Garden Table 1", seats: 6, shape: "round", x: 150, y: 180, guests: [], targetGroup: "Family", scale: 1, rotation: 15, seatAssignments: {} },
+      { name: "Garden Table 2", seats: 8, shape: "round", x: 350, y: 160, guests: [], targetGroup: "Friends", scale: 1.1, rotation: -20, seatAssignments: {} },
+      { name: "Garden Table 3", seats: 6, shape: "round", x: 500, y: 220, guests: [], targetGroup: "Family", scale: 0.9, rotation: 30, seatAssignments: {} },
+      { name: "Garden Table 4", seats: 8, shape: "round", x: 200, y: 320, guests: [], targetGroup: "Colleagues", scale: 1, rotation: -15, seatAssignments: {} },
+      { name: "Garden Table 5", seats: 6, shape: "round", x: 450, y: 350, guests: [], targetGroup: "Friends", scale: 1, rotation: 45, seatAssignments: {} },
+      { name: "Picnic Table", seats: 10, shape: "long-rectangular", x: 320, y: 280, guests: [], targetGroup: "Mixed", scale: 1, rotation: 20, seatAssignments: {} }
+    ],
+    venueObjects: [
+      { name: "Performance Area", type: "stage", x: 300, y: 100, width: 180, height: 80, rotation: 0, color: "#F59E0B" },
+      { name: "Dance Floor", type: "dancefloor", x: 250, y: 200, width: 120, height: 120, rotation: 15, color: "#F59E0B" },
+      { name: "Main Entrance", type: "exit", x: 350, y: 400, width: 80, height: 60, rotation: 0, color: "#EF4444" }
+    ]
+  },
+  {
+    id: "arena",
+    name: "Arena",
+    description: "Central performance space surrounded by seating sections",
+    capacity: 200,
+    venueType: "seat-based",
+    tables: [],
+    seatSections: [
+      { id: "floor-a", name: "Floor Section A", rows: 8, seatsPerRow: 12, startX: 150, startY: 300, rotation: 45, priceTier: "Premium", color: "#F59E0B" },
+      { id: "floor-b", name: "Floor Section B", rows: 8, seatsPerRow: 12, startX: 450, startY: 300, rotation: -45, priceTier: "Premium", color: "#F59E0B" },
+      { id: "lower-1", name: "Lower Bowl 1", rows: 6, seatsPerRow: 10, startX: 120, startY: 180, rotation: 30, priceTier: "General", color: "#3B82F6" },
+      { id: "lower-2", name: "Lower Bowl 2", rows: 6, seatsPerRow: 10, startX: 480, startY: 180, rotation: -30, priceTier: "General", color: "#3B82F6" },
+      { id: "lower-3", name: "Lower Bowl 3", rows: 6, seatsPerRow: 10, startX: 300, startY: 120, priceTier: "General", color: "#3B82F6" },
+      { id: "lower-4", name: "Lower Bowl 4", rows: 6, seatsPerRow: 10, startX: 300, startY: 380, priceTier: "General", color: "#3B82F6" },
+      { id: "vip-suite-1", name: "VIP Suite 1", rows: 2, seatsPerRow: 8, startX: 100, startY: 100, priceTier: "VIP", color: "#8B5CF6" },
+      { id: "vip-suite-2", name: "VIP Suite 2", rows: 2, seatsPerRow: 8, startX: 500, startY: 100, priceTier: "VIP", color: "#8B5CF6" }
+    ],
+    seats: [],
+    venueObjects: [
+      { name: "Center Stage", type: "stage", x: 275, y: 225, width: 150, height: 150, rotation: 0, color: "#8B5CF6" },
+      { name: "Backstage", type: "stage", x: 275, y: 400, width: 100, height: 60, rotation: 0, color: "#6B7280" },
+      { name: "North Exit", type: "exit", x: 300, y: 50, width: 80, height: 60, rotation: 0, color: "#EF4444" },
+      { name: "East Exit", type: "exit", x: 550, y: 250, width: 60, height: 80, rotation: 0, color: "#EF4444" },
+      { name: "West Exit", type: "exit", x: 50, y: 250, width: 60, height: 80, rotation: 0, color: "#EF4444" }
+    ]
+  },
+  {
+    id: "theater",
+    name: "Theater",
+    description: "Traditional theater with rows facing the stage",
+    capacity: 150,
+    venueType: "seat-based",
+    tables: [],
+    seatSections: [
+      { id: "front-row", name: "Front Row", rows: 1, seatsPerRow: 12, startX: 300, startY: 200, priceTier: "VIP", color: "#8B5CF6" },
+      { id: "row-2", name: "Row 2", rows: 1, seatsPerRow: 14, startX: 300, startY: 240, priceTier: "Premium", color: "#F59E0B" },
+      { id: "row-3", name: "Row 3", rows: 1, seatsPerRow: 16, startX: 300, startY: 280, priceTier: "General", color: "#3B82F6" },
+      { id: "row-4", name: "Row 4", rows: 1, seatsPerRow: 18, startX: 300, startY: 320, priceTier: "General", color: "#3B82F6" },
+      { id: "row-5", name: "Row 5", rows: 1, seatsPerRow: 20, startX: 300, startY: 360, priceTier: "General", color: "#3B82F6" },
+      { id: "balcony-left", name: "Balcony Left", rows: 2, seatsPerRow: 8, startX: 180, startY: 150, rotation: 15, priceTier: "Premium", color: "#F59E0B" },
+      { id: "balcony-right", name: "Balcony Right", rows: 2, seatsPerRow: 8, startX: 420, startY: 150, rotation: -15, priceTier: "Premium", color: "#F59E0B" }
+    ],
+    seats: [],
+    venueObjects: [
+      { name: "Main Stage", type: "stage", x: 250, y: 80, width: 200, height: 100, rotation: 0, color: "#8B5CF6" },
+      { name: "Orchestra Pit", type: "stage", x: 275, y: 160, width: 150, height: 40, rotation: 0, color: "#06B6D4" },
+      { name: "Stage Left Exit", type: "exit", x: 150, y: 80, width: 60, height: 80, rotation: 0, color: "#EF4444" },
+      { name: "Stage Right Exit", type: "exit", x: 450, y: 80, width: 60, height: 80, rotation: 0, color: "#EF4444" },
+      { name: "Back Exit", type: "exit", x: 300, y: 420, width: 100, height: 60, rotation: 0, color: "#EF4444" }
+    ]
+  },
+  {
+    id: "conference",
+    name: "Conference Room",
+    description: "Professional setup for meetings and presentations",
+    capacity: 60,
+    venueType: "table-based",
+    tables: [
+      { name: "Head Table", seats: 8, shape: "long-rectangular", x: 300, y: 120, guests: [], targetGroup: "Speakers", scale: 1.2, rotation: 0, seatAssignments: {} },
+      { name: "Table 1", seats: 8, shape: "rectangular", x: 200, y: 200, guests: [], targetGroup: "VIP", scale: 1, rotation: 0, seatAssignments: {} },
+      { name: "Table 2", seats: 8, shape: "rectangular", x: 400, y: 200, guests: [], targetGroup: "VIP", scale: 1, rotation: 0, seatAssignments: {} },
+      { name: "Table 3", seats: 8, shape: "rectangular", x: 200, y: 280, guests: [], targetGroup: "General", scale: 1, rotation: 0, seatAssignments: {} },
+      { name: "Table 4", seats: 8, shape: "rectangular", x: 400, y: 280, guests: [], targetGroup: "General", scale: 1, rotation: 0, seatAssignments: {} },
+      { name: "Table 5", seats: 8, shape: "rectangular", x: 200, y: 360, guests: [], targetGroup: "General", scale: 1, rotation: 0, seatAssignments: {} },
+      { name: "Table 6", seats: 8, shape: "rectangular", x: 400, y: 360, guests: [], targetGroup: "General", scale: 1, rotation: 0, seatAssignments: {} }
+    ],
+    venueObjects: [
+      { name: "Presentation Screen", type: "stage", x: 250, y: 60, width: 200, height: 80, rotation: 0, color: "#06B6D4" },
+      { name: "Podium", type: "podium", x: 300, y: 90, width: 80, height: 80, rotation: 0, color: "#06B6D4" },
+      { name: "Main Entrance", type: "exit", x: 300, y: 420, width: 100, height: 60, rotation: 0, color: "#EF4444" }
+    ]
+  }
+];

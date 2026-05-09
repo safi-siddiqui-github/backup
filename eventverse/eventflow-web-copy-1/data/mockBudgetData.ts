@@ -1,0 +1,464 @@
+import { BudgetTemplate, VendorProfile } from "@/types/budget";
+import type { BudgetExpenseItem, Proposal } from "@/components/budget/ComprehensiveBudgetModule";
+
+export const EVENT_TEMPLATES: BudgetTemplate[] = [
+  {
+    eventType: 'Wedding',
+    categories: [
+      { name: 'Venue', percentage: 30, priority: 'high', subcategories: ['Ceremony', 'Reception'] },
+      { name: 'Catering', percentage: 25, priority: 'high', subcategories: ['Food', 'Beverages', 'Cake'] },
+      { name: 'Photography', percentage: 15, priority: 'medium', subcategories: ['Photographer', 'Videographer'] },
+      { name: 'Florals', percentage: 10, priority: 'medium', subcategories: ['Bouquets', 'Decor', 'Centerpieces'] },
+      { name: 'Entertainment', percentage: 10, priority: 'medium', subcategories: ['DJ', 'Band'] },
+      { name: 'Attire', percentage: 5, priority: 'low', subcategories: ['Dress', 'Suit'] },
+      { name: 'Stationery', percentage: 3, priority: 'low', subcategories: ['Invitations', 'Thank You Cards'] },
+      { name: 'Gifts & Favors', percentage: 2, priority: 'low', subcategories: ['Gifts', 'Favors'] },
+    ],
+  },
+  {
+    eventType: 'Corporate Event',
+    categories: [
+      { name: 'Venue', percentage: 35, priority: 'high', subcategories: ['Conference Room', 'Exhibition Space'] },
+      { name: 'Catering', percentage: 30, priority: 'high', subcategories: ['Breakfast', 'Lunch', 'Dinner'] },
+      { name: 'Speakers', percentage: 20, priority: 'medium', subcategories: ['Keynote', 'Workshop'] },
+      { name: 'Marketing', percentage: 10, priority: 'medium', subcategories: ['Promotions', 'Advertising'] },
+      { name: 'Miscellaneous', percentage: 5, priority: 'low', subcategories: ['Decorations', 'Gifts'] },
+    ],
+  },
+  {
+    eventType: 'Birthday Party',
+    categories: [
+      { name: 'Venue', percentage: 25, priority: 'high', subcategories: ['Hall', 'Restaurant'] },
+      { name: 'Catering', percentage: 30, priority: 'high', subcategories: ['Food', 'Beverages', 'Cake'] },
+      { name: 'Entertainment', percentage: 20, priority: 'medium', subcategories: ['DJ', 'Games'] },
+      { name: 'Decorations', percentage: 15, priority: 'medium', subcategories: ['Balloons', 'Lights'] },
+      { name: 'Gifts & Favors', percentage: 10, priority: 'low', subcategories: ['Gifts', 'Favors'] },
+    ],
+  },
+];
+
+export const MOCK_VENDORS: VendorProfile[] = [
+  {
+    id: "vendor-1",
+    name: "Elegant Venues Inc.",
+    category: "Venue",
+    subcategories: ["Ceremony", "Reception"],
+    description: "Premier venue provider with elegant spaces for weddings and corporate events.",
+    location: "New York, NY",
+    contact: {
+      email: "info@elegantvenues.com",
+      phone: "212-555-1234",
+      website: "www.elegantvenues.com",
+    },
+    rating: 4.8,
+    reviewCount: 125,
+    portfolio: ["venue1.jpg", "venue2.jpg", "venue3.jpg"],
+    services: ["Venue Rental", "Event Planning", "Catering"],
+    priceRange: "premium",
+    availability: {
+      busy: [new Date("2024-07-04"), new Date("2024-08-15")],
+      available: [new Date("2024-07-05"), new Date("2024-08-16")],
+    },
+    verified: true,
+    responseTime: "Within 24 hours",
+    completedEvents: 350,
+    certifications: ["Certified Event Planner", "Licensed Venue Operator"],
+    insurance: true,
+    specialties: ["Weddings", "Corporate Events", "Galas"],
+    yearEstablished: 2005,
+    teamSize: 25,
+    awards: ["Best Venue 2022", "Event Excellence Award 2023"],
+  },
+  {
+    id: "vendor-2",
+    name: "Gourmet Catering Services",
+    category: "Catering",
+    subcategories: ["Food", "Beverages", "Cake"],
+    description: "Exquisite catering services with customizable menus for all occasions.",
+    location: "Los Angeles, CA",
+    contact: {
+      email: "catering@gourmetfood.com",
+      phone: "310-555-5678",
+      website: "www.gourmetfood.com",
+    },
+    rating: 4.6,
+    reviewCount: 95,
+    portfolio: ["food1.jpg", "food2.jpg", "food3.jpg"],
+    services: ["Catering", "Bartending", "Cake Design"],
+    priceRange: "mid-range",
+    availability: {
+      busy: [new Date("2024-06-20"), new Date("2024-09-01")],
+      available: [new Date("2024-06-21"), new Date("2024-09-02")],
+    },
+    verified: true,
+    responseTime: "Within 48 hours",
+    completedEvents: 280,
+    certifications: ["Certified Food Handler", "Licensed Bartender"],
+    insurance: true,
+    specialties: ["Weddings", "Corporate Events", "Private Parties"],
+    yearEstablished: 2010,
+    teamSize: 15,
+    awards: ["Catering Excellence Award 2021", "Best Cake Design 2023"],
+  },
+  {
+    id: "vendor-3",
+    name: "Pixel Perfect Photography",
+    category: "Photography",
+    subcategories: ["Photographer", "Videographer"],
+    description: "Professional photography and videography services capturing your special moments.",
+    location: "Chicago, IL",
+    contact: {
+      email: "photo@pixelperfect.com",
+      phone: "312-555-9012",
+      website: "www.pixelperfect.com",
+    },
+    rating: 4.9,
+    reviewCount: 150,
+    portfolio: ["photo1.jpg", "photo2.jpg", "photo3.jpg"],
+    services: ["Photography", "Videography", "Photo Booth"],
+    priceRange: "premium",
+    availability: {
+      busy: [new Date("2024-07-10"), new Date("2024-08-20")],
+      available: [new Date("2024-07-11"), new Date("2024-08-21")],
+    },
+    verified: true,
+    responseTime: "Within 24 hours",
+    completedEvents: 400,
+    certifications: ["Certified Professional Photographer"],
+    insurance: true,
+    specialties: ["Weddings", "Corporate Events", "Family Portraits"],
+    yearEstablished: 2000,
+    teamSize: 10,
+    awards: ["Photography Excellence Award 2022", "Best Wedding Photographer 2023"],
+  },
+  {
+    id: "vendor-4",
+    name: "Floral Fantasies",
+    category: "Florals",
+    subcategories: ["Bouquets", "Decor", "Centerpieces"],
+    description: "Stunning floral arrangements and decor for weddings and events.",
+    location: "Miami, FL",
+    contact: {
+      email: "flowers@floralfantasies.com",
+      phone: "305-555-3456",
+      website: "www.floralfantasies.com",
+    },
+    rating: 4.7,
+    reviewCount: 110,
+    portfolio: ["floral1.jpg", "floral2.jpg", "floral3.jpg"],
+    services: ["Floral Arrangements", "Event Decor", "Wedding Bouquets"],
+    priceRange: "mid-range",
+    availability: {
+      busy: [new Date("2024-06-25"), new Date("2024-09-10")],
+      available: [new Date("2024-06-26"), new Date("2024-09-11")],
+    },
+    verified: true,
+    responseTime: "Within 48 hours",
+    completedEvents: 320,
+    certifications: ["Certified Floral Designer"],
+    insurance: true,
+    specialties: ["Weddings", "Corporate Events", "Parties"],
+    yearEstablished: 2008,
+    teamSize: 12,
+    awards: ["Floral Design Excellence Award 2021", "Best Wedding Florist 2023"],
+  },
+  {
+    id: "vendor-5",
+    name: "Sonic Boom Entertainment",
+    category: "Entertainment",
+    subcategories: ["DJ", "Band"],
+    description: "Professional DJ and live band services for unforgettable events.",
+    location: "Austin, TX",
+    contact: {
+      email: "music@sonicboom.com",
+      phone: "512-555-7890",
+      website: "www.sonicboom.com",
+    },
+    rating: 4.5,
+    reviewCount: 80,
+    portfolio: ["music1.mp3", "music2.mp3", "music3.mp3"],
+    services: ["DJ Services", "Live Band", "Sound & Lighting"],
+    priceRange: "budget",
+    availability: {
+      busy: [new Date("2024-07-01"), new Date("2024-08-01")],
+      available: [new Date("2024-07-02"), new Date("2024-08-02")],
+    },
+    verified: true,
+    responseTime: "Within 72 hours",
+    completedEvents: 250,
+    certifications: ["Licensed DJ", "Professional Musician"],
+    insurance: true,
+    specialties: ["Weddings", "Corporate Events", "Parties"],
+    yearEstablished: 2012,
+    teamSize: 8,
+    awards: ["Entertainment Excellence Award 2020", "Best DJ Service 2022"],
+  },
+];
+
+export const MOCK_PROPOSALS: Proposal[] = [
+  {
+    id: "proposal-1",
+    vendorId: "vendor-1",
+    expenseItemId: "expense-1",
+    title: "Elegant Venue Package",
+    description: "Complete venue rental with tables, chairs, and basic lighting for your special day",
+    totalCost: 8500,
+    breakdown: [
+      { item: "Venue Rental (8 hours)", quantity: 1, unitPrice: 6000, total: 6000 },
+      { item: "Tables & Chairs Setup", quantity: 1, unitPrice: 1500, total: 1500 },
+      { item: "Basic Lighting Package", quantity: 1, unitPrice: 1000, total: 1000 }
+    ],
+    timeline: "Available for your event date",
+    deliverables: [
+      "Venue access from 2 PM to 10 PM",
+      "Tables and chairs for 100 guests",
+      "Basic lighting and sound system",
+      "On-site coordinator",
+      "Cleanup service included"
+    ],
+    terms: "50% deposit required upon booking. Balance due 30 days before event. Cancellation policy applies.",
+    validUntil: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000), // 14 days from now
+    status: 'pending' as const,
+    submittedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000), // 2 days ago
+    paymentSchedule: [
+      {
+        milestone: "Booking Confirmation",
+        percentage: 50,
+        amount: 4250,
+        dueDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+      },
+      {
+        milestone: "Final Payment",
+        percentage: 50,
+        amount: 4250,
+        dueDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
+      }
+    ]
+  },
+  {
+    id: "proposal-2",
+    vendorId: "vendor-2",
+    expenseItemId: "expense-2",
+    title: "Gourmet Catering Experience",
+    description: "Three-course plated dinner with cocktail hour and premium bar service",
+    totalCost: 7500,
+    breakdown: [
+      { item: "Cocktail Hour Appetizers", quantity: 100, unitPrice: 25, total: 2500 },
+      { item: "Three-Course Plated Dinner", quantity: 100, unitPrice: 45, total: 4500 },
+      { item: "Premium Bar Service", quantity: 1, unitPrice: 500, total: 500 }
+    ],
+    timeline: "Setup 3 hours before service",
+    deliverables: [
+      "Professional waitstaff (6 servers)",
+      "Premium appetizer selection",
+      "Choice of chicken, beef, or vegetarian entree",
+      "Signature cocktails and wine pairing",
+      "Wedding cake cutting service"
+    ],
+    terms: "Menu tasting included. 48-hour final count required. Service charge and gratuity separate.",
+    validUntil: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000), // 10 days from now
+    status: 'pending' as const,
+    submittedAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000), // 1 day ago
+    paymentSchedule: [
+      {
+        milestone: "Contract Signing",
+        percentage: 25,
+        amount: 1875,
+        dueDate: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000)
+      },
+      {
+        milestone: "Final Menu Confirmation",
+        percentage: 75,
+        amount: 5625,
+        dueDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000)
+      }
+    ]
+  },
+  {
+    id: "proposal-3",
+    vendorId: "vendor-3",
+    expenseItemId: "expense-3",
+    title: "Professional Photography Coverage",
+    description: "Full-day wedding photography with engagement session and digital gallery",
+    totalCost: 3200,
+    breakdown: [
+      { item: "Engagement Session", quantity: 1, unitPrice: 500, total: 500 },
+      { item: "Wedding Day Coverage (8 hours)", quantity: 1, unitPrice: 2000, total: 2000 },
+      { item: "Digital Gallery & Editing", quantity: 1, unitPrice: 700, total: 700 }
+    ],
+    timeline: "Available for your wedding date",
+    deliverables: [
+      "2-hour engagement session",
+      "8 hours of wedding day coverage",
+      "500+ edited high-resolution photos",
+      "Online gallery for sharing",
+      "Print release included"
+    ],
+    terms: "Engagement session to be completed 2-8 weeks before wedding. Full payment due 30 days before event.",
+    validUntil: new Date(Date.now() + 21 * 24 * 60 * 60 * 1000), // 21 days from now
+    status: 'under_review' as const,
+    submittedAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000), // 3 days ago
+  },
+  {
+    id: "proposal-4",
+    vendorId: "vendor-4",
+    expenseItemId: "expense-4",
+    title: "Bridal Floral Design Package",
+    description: "Complete floral arrangements including bridal bouquet, centerpieces, and ceremony decor",
+    totalCost: 2800,
+    breakdown: [
+      { item: "Bridal Bouquet & Boutonniere", quantity: 1, unitPrice: 350, total: 350 },
+      { item: "Centerpieces (10 tables)", quantity: 10, unitPrice: 85, total: 850 },
+      { item: "Ceremony Arch Florals", quantity: 1, unitPrice: 650, total: 650 },
+      { item: "Aisle Petals & Misc Decor", quantity: 1, unitPrice: 450, total: 450 },
+      { item: "Setup & Breakdown", quantity: 1, unitPrice: 500, total: 500 }
+    ],
+    timeline: "Flowers delivered morning of wedding",
+    deliverables: [
+      "Bridal bouquet with premium flowers",
+      "Matching boutonnieres for groomsmen",
+      "10 elegant table centerpieces",
+      "Ceremony arch floral arrangements",
+      "Aisle petals and additional decor",
+      "Professional setup and breakdown"
+    ],
+    terms: "Flower selection meeting 4 weeks before wedding. Weather contingency plan included.",
+    validUntil: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days from now
+    status: 'negotiating' as const,
+    submittedAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000), // 5 days ago
+  },
+  {
+    id: "proposal-5",
+    vendorId: "vendor-5",
+    expenseItemId: "expense-5",
+    title: "Live Entertainment Package",
+    description: "Professional DJ services with lighting and sound system for ceremony and reception",
+    totalCost: 1800,
+    breakdown: [
+      { item: "DJ Services (8 hours)", quantity: 1, unitPrice: 1200, total: 1200 },
+      { item: "Sound System & Microphones", quantity: 1, unitPrice: 300, total: 300 },
+      { item: "Lighting Package", quantity: 1, unitPrice: 300, total: 300 }
+    ],
+    timeline: "Setup 2 hours before ceremony",
+    deliverables: [
+      "Professional DJ for 8 hours",
+      "Complete sound system",
+      "Wireless microphones for ceremony",
+      "Dance floor lighting",
+      "Music consultation meeting",
+      "Backup equipment included"
+    ],
+    terms: "Music preferences form to be completed 2 weeks before event. Setup included in price.",
+    validUntil: new Date(Date.now() + 12 * 24 * 60 * 60 * 1000), // 12 days from now
+    status: 'accepted' as const,
+    submittedAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000), // 7 days ago
+  }
+];
+
+export const WEDDING_EXPENSE_ITEMS: BudgetExpenseItem[] = [
+  {
+    id: "expense-1",
+    category: "Venue",
+    subcategory: "Reception",
+    title: "Reception Venue Rental",
+    description: "Rental fee for the reception venue, including tables, chairs, and basic setup.",
+    estimatedCost: 7500,
+    allocatedBudget: 8000,
+    actualCost: 0,
+    priority: "high",
+    status: "planning",
+    aiSuggested: true,
+    requirements: "Must accommodate 100 guests, have parking, and allow outside catering.",
+    deadline: new Date("2024-05-01"),
+    vendorRequirements: {
+      experience: "5+ years in wedding venues",
+      portfolio: true,
+      insurance: true,
+      references: true,
+    },
+  },
+  {
+    id: "expense-2",
+    category: "Catering",
+    subcategory: "Food",
+    title: "Wedding Dinner Catering",
+    description: "Catering service for the wedding dinner, including appetizers, main course, and dessert.",
+    estimatedCost: 6000,
+    allocatedBudget: 7000,
+    actualCost: 0,
+    priority: "high",
+    status: "planning",
+    aiSuggested: true,
+    requirements: "Must provide vegetarian options, accommodate dietary restrictions, and include setup and cleanup.",
+    deadline: new Date("2024-05-15"),
+    vendorRequirements: {
+      experience: "3+ years in wedding catering",
+      portfolio: true,
+      insurance: true,
+      references: true,
+    },
+  },
+  {
+    id: "expense-3",
+    category: "Photography",
+    subcategory: "Photographer",
+    title: "Wedding Photography Service",
+    description: "Professional photography service for the entire wedding day, including pre-ceremony, ceremony, and reception.",
+    estimatedCost: 4000,
+    allocatedBudget: 4500,
+    actualCost: 0,
+    priority: "medium",
+    status: "planning",
+    aiSuggested: true,
+    requirements: "Must provide a second photographer, offer digital copies of all photos, and include editing.",
+    deadline: new Date("2024-06-01"),
+    vendorRequirements: {
+      experience: "4+ years in wedding photography",
+      portfolio: true,
+      insurance: true,
+      references: true,
+    },
+  },
+  {
+    id: "expense-4",
+    category: "Florals",
+    subcategory: "Bouquets",
+    title: "Bridal Bouquet and Flowers",
+    description: "Floral arrangements for the wedding, including bridal bouquet, bridesmaids' bouquets, and boutonnieres.",
+    estimatedCost: 1500,
+    allocatedBudget: 2000,
+    actualCost: 0,
+    priority: "medium",
+    status: "planning",
+    aiSuggested: true,
+    requirements: "Must use specific flower types, match wedding color scheme, and deliver on the wedding day.",
+    deadline: new Date("2024-06-15"),
+    vendorRequirements: {
+      experience: "2+ years in wedding floral design",
+      portfolio: true,
+      insurance: false,
+      references: true,
+    },
+  },
+  {
+    id: "expense-5",
+    category: "Entertainment",
+    subcategory: "DJ",
+    title: "DJ Service for Reception",
+    description: "DJ service for the wedding reception, including music, sound system, and lighting.",
+    estimatedCost: 2000,
+    allocatedBudget: 2500,
+    actualCost: 0,
+    priority: "medium",
+    status: "planning",
+    aiSuggested: true,
+    requirements: "Must provide a playlist consultation, have backup equipment, and be able to take requests.",
+    deadline: new Date("2024-07-01"),
+    vendorRequirements: {
+      experience: "3+ years in wedding DJ services",
+      portfolio: false,
+      insurance: true,
+      references: true,
+    },
+  },
+];
