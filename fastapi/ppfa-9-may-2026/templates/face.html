@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Face Detection</title>
+  </head>
+  <body>
+    <h1>Face Detection Demo</h1>
+    <video id="video" width="640" height="480" autoplay></video>
+    <canvas id="canvas" width="640" height="480"></canvas>
+
+    <script>
+      const video = document.getElementById("video");
+      const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+
+      navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
+        video.srcObject = stream;
+      });
+
+      video.addEventListener("play", () => {
+        const detectLoop = async () => {
+          // Draw current video frame
+          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+          // Convert canvas to blob and send to server
+          canvas.toBlob(async (blob) => {
+            const formData = new FormData();
+            formData.append("file", blob, "frame.png");
+
+            try {
+              const res = await fetch("/detect-face", {
+                method: "POST",
+                body: formData,
+              });
+
+              const data = await res.json();
+
+              // Draw rectangles around faces
+              ctx.strokeStyle = "red";
+              ctx.lineWidth = 2;
+              data.faces.forEach((face) => {
+                const [x, y, w, h] = face;
+                ctx.strokeRect(x, y, w, h);
+              });
+            } catch (err) {
+              console.error(err);
+            }
+          }, "image/png");
+
+          setTimeout(detectLoop, 500); // 500ms interval (adjust for performance)
+        };
+
+        detectLoop();
+      });
+    </script>
+  </body>
+</html>
