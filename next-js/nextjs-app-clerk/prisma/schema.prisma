@@ -1,0 +1,64 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        Int        @id @default(autoincrement())
+  clerkId   String?    @unique
+  email     String?    @unique
+  name      String?
+  createdAt DateTime?  @default(now())
+  updatedAt DateTime?  @updatedAt
+  blogPosts BlogPost[]
+}
+
+model BlogCategory {
+  id        Int                     @id @default(autoincrement())
+  name      String?
+  createdAt DateTime?               @default(now())
+  updatedAt DateTime?               @updatedAt
+  blogPosts BlogCategoriesOnPosts[]
+}
+
+enum BlogPostStatus {
+  DRAFT
+  PENDING_REVIEW
+  SCHEDULED
+  PUBLISHED
+  PRIVATE
+  ARCHIVED
+}
+
+model BlogPost {
+  id             Int                     @id @default(autoincrement())
+  slug           String?                 @unique
+  title          String?
+  excerpt        String?
+  content        String?
+  featuredImage  String?
+  seoTitle       String?
+  seoDescription String?
+  status         BlogPostStatus          @default(DRAFT)
+  publishedAt    DateTime?
+  userId         Int
+  user           User                    @relation(fields: [userId], references: [id])
+  createdAt      DateTime?               @default(now())
+  updatedAt      DateTime?               @updatedAt
+  blogCategories BlogCategoriesOnPosts[]
+}
+
+model BlogCategoriesOnPosts {
+  blogPostId     Int
+  blogPosts      BlogPost     @relation(fields: [blogPostId], references: [id])
+  blogCategoryId Int
+  blogCategory   BlogCategory @relation(fields: [blogCategoryId], references: [id])
+  assignedAt     DateTime?    @default(now())
+  assignedById   String?
+
+  @@id([blogPostId, blogCategoryId])
+}
